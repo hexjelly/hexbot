@@ -24,9 +24,11 @@
     "irc": "^0.4.0"
   },
   "devDependencies": {
+    "eslint": "^1.6.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.0.2",
     "gulp-concat": "^2.6.0",
-    "gulp-sass": "^2.0.4"
+    "gulp-sass": "^2.0.4",
+    "mocha": "^2.3.3"
   }
 }
