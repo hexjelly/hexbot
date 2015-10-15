@@ -21,7 +21,12 @@
   "homepage": "https://github.com/hexjelly/node-hexbot#readme",
   "dependencies": {
     "express": "^4.13.3",
-    "gulp": "^3.9.0",
     "irc": "^0.4.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.0.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-sass": "^2.0.4"
   }
 }
