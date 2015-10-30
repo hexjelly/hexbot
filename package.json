@@ -1,5 +1,5 @@
 {
-  "name": "node-hexbot",
+  "name": "hexbot",
   "version": "0.1.0",
   "description": "A poor nodejs IRC bot",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hexjelly/node-hexbot.git"
+    "url": "git+https://github.com/hexjelly/hexbot.git"
   },
   "keywords": [
     "irc"
@@ -16,9 +16,9 @@
   "author": "Hexjelly",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hexjelly/node-hexbot/issues"
+    "url": "https://github.com/hexjelly/hexbot/issues"
   },
-  "homepage": "https://github.com/hexjelly/node-hexbot#readme",
+  "homepage": "https://github.com/hexjelly/hexbot#readme",
   "dependencies": {
     "express": "^4.13.3",
     "irc": "^0.4.0"
