@@ -17,8 +17,8 @@ var bot = new irc.Client(
 
 
 // error handler
-bot.addListener('error', function(message) {
-    console.log('error: ', message);
+bot.on('error', function (message) {
+  console.log('error: ', message);
 });
 
 
