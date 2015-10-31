@@ -1,8 +1,8 @@
 {
-  'server': 'open.ircnet.net',
-  'serverPort': 6667,
-  'channels': ['#hextest'],
-  'botName': 'hexbot',
-  'admin': 'hexjelly',
-  'adminPassword': 'admin'
+  "server": "open.ircnet.net",
+  "serverPort": 6667,
+  "channels": ["#hextest"],
+  "botName": "hexbot",
+  "admin": "hexjelly",
+  "adminPassword": "admin"
 }
