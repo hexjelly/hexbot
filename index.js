@@ -7,10 +7,10 @@
   nconf.file({file: getConfigFile()});
 
   function getConfigFile() {
-		var overrideConfig = './config/config.user.json';
-		var defaultConfig = './config/config.default.json';
-		return require('fs').existsSync(overrideConfig) ? overrideConfig : defaultConfig;
-	}
+    var overrideConfig = './config/config.user.json';
+    var defaultConfig = './config/config.default.json';
+    return require('fs').existsSync(overrideConfig) ? overrideConfig : defaultConfig;
+  }
 
 
   var bot = new irc.Client(
@@ -36,21 +36,21 @@
   };
 
   bot.loadPlugins = function loadPlugins() {
-  	var walk = require('walk');
-  	var walker = walk.walk('./plugins', { followLinks: false });
+    var walk = require('walk');
+    var walker = walk.walk('./plugins', { followLinks: false });
 
-  	walker.on('file', function(root, stat, next) {
-  		if (stat.name.slice(-3) === '.js') {
-  			console.log('loading plugin %s/%s', root, stat.name);
-  			try {
-  				bot.use(require(root + '/' + stat.name));
-  			} catch (err) {
-  				console.error(err);
-  				console.log('----------------------');
-  			}
-  		}
-  		next();
-  	});
+    walker.on('file', function(root, stat, next) {
+      if (stat.name.slice(-3) === '.js') {
+        console.log('loading plugin %s/%s', root, stat.name);
+        try {
+          bot.use(require(root + '/' + stat.name));
+        } catch (err) {
+          console.error(err);
+          console.log('----------------------');
+        }
+      }
+      next();
+    });
   };
 
   bot.loadPlugins();
