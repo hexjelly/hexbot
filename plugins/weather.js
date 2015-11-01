@@ -23,10 +23,15 @@ module.exports = (function () {
 
     request(url, function (error, response, body) {
       if (!error && response.statusCode == 200) {
-        var weather = JSON.parse(body).query.results.channel;
-        var result = weather.location.city + ', ' + weather.location.country + ': ' + weather.item.condition.temp + '°C ' + weather.item.condition.text + ', ' + weather.atmosphere.humidity + '% humidity, ' + weather.wind.chill + '°C ' + weather.wind.speed + 'km/h winds';
-
-        bot.say(to, result);
+        var weather = JSON.parse(body);
+        if (weather.query.count > 0) {
+          weather = weather.query.results.channel;
+              var location = weather.location.city == weather.location.country ? weather.location.country : weather.location.city + ', ' + weather.location.country ;
+              var result = location + ': ' + weather.item.condition.temp + '°C ' + weather.item.condition.text + ', ' + weather.atmosphere.humidity + '% humidity, ' + weather.wind.chill + '°C ' + weather.wind.speed + 'km/h winds';
+              bot.say(to, result);
+        } else {
+          bot.say(to, 'Location not found.');
+        }
       }
     });
   };
