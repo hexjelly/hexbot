@@ -43,5 +43,5 @@ module.exports = (function () {
         bot.say(to, result);
       }
     });
-  }
+  };
 })();

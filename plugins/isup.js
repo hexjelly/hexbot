@@ -30,5 +30,5 @@ module.exports = (function () {
         bot.say(to, testURI + ' is down for me as well');
       }
     });
-  }
+  };
 })();
