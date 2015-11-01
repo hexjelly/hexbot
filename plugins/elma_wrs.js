@@ -12,11 +12,12 @@ module.exports = (function () {
       }
       var result = regex.exec(text);
       if (result && result[1] <= 54 && result[1] >= 1) {
-        bot.say(to, getWR(result[1]));
+        getWR(result[1], bot, to); // thanks to async hell, no idea how to do this better?
       }
     });
   };
-  function getWR(n) {
+
+  function getWR(n, bot, to) {
     var request = require('request');
     var cheerio = require('cheerio');
     var url = 'http://www.moposite.com/records_elma_wrs.php';
@@ -30,6 +31,17 @@ module.exports = (function () {
                     'Haircut','Double Trouble','Framework','Enduro','He He','Freefall','Sink','Bowling',
                     'Enigma','Downhill','What the Heck','Expert System','Tricks Abound','Hang Tight',
                     'Hooked','Apple Harvest'];
-    return n + '. ' + internals[parseInt(n)-1] + ': ';
-  };
+
+    var result = n + '. ' + internals[parseInt(n)-1] + ': ';
+    request(url, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        var elementNumber = (n < 28 ? (n * 6) + 2 : ((n-27) * 6) + 5);
+        var $ = cheerio.load(body);
+        var wrTime = $('td', '.wrtable').eq(elementNumber-1).text();
+        var wrHolder = $('td', '.wrtable').eq(elementNumber).text();
+        result += wrTime + ' by ' + wrHolder;
+        bot.say(to, result);
+      }
+    });
+  }
 })();
