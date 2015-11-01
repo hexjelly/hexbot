@@ -25,5 +25,6 @@
     "botName": "hexbot",
     "admin": "hexjelly",
     "adminPassword": "admin"
-  }
+  },
+  "ignoredPlugins": ["bear"]
 }
