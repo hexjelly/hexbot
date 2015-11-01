@@ -24,7 +24,9 @@
     "express": "^4.13.3",
     "irc": "^0.4.0",
     "nconf": "^0.8.2",
-    "require": "^2.4.20"
+    "request": "^2.65.0",
+    "require": "^2.4.20",
+    "walk": "^2.3.9"
   },
   "devDependencies": {
     "eslint": "^1.6.0",

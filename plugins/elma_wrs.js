@@ -4,15 +4,15 @@
 
 module.exports = (function () {
   return function init(bot) {
-    var regex = /^!wr\s*0*(\d+)$/i; // matches lines starting with '!wr' followed by optional whitespace, optional 0s, then digit(s)
+    var regex = /^!wr\s*0*(\d*)$/i; // matches lines starting with '!wr' followed by optional whitespace, optional 0s, then digit(s)
 
     bot.on('message', function(from, to, text) {
       if (to === bot.nick) { // pm instead of channel
         to = from;
       }
-      var result = re.exec(text);
-      if (result && result[1] <= 54) {
-        bot.say(to,getWR(result[1]));
+      var result = regex.exec(text);
+      if (result && result[1] <= 54 && result[1] >= 1) {
+        bot.say(to, getWR(result[1]));
       }
     });
   };
@@ -30,6 +30,6 @@ module.exports = (function () {
                     'Haircut','Double Trouble','Framework','Enduro','He He','Freefall','Sink','Bowling',
                     'Enigma','Downhill','What the Heck','Expert System','Tricks Abound','Hang Tight',
                     'Hooked','Apple Harvest'];
-    return n + '. ' + internals[n+1] + ': ';
+    return n + '. ' + internals[parseInt(n)-1] + ': ';
   };
 })();
