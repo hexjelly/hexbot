@@ -4,8 +4,6 @@
 
 module.exports = (function () {
   return function init(bot) {
-    // extremely naive barebones check of URI as we're passing it to request module anyway
-    // basically just checks if anything matches *.* with optional http or https infront and ignores missing : or / characters
     var regex = /^!weather\s+(.+)/i;
 
     bot.on('message', function(from, to, text) {
