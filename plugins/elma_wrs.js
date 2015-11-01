@@ -25,7 +25,11 @@ module.exports = (function () {
                     'Hi Flyer','Tag','Tunnel Terror','The Steppes','Gravity Ride','Islands in the Sky',
                     'Hill Legend','Loop-de-Loop','Serpents Tale','New Wave','Labyrinth','Spiral',
                     'Turnaround','Upside Down','Hangman','Slalom','Quick Round','Ramp Frenzy','Precarious',
-                    'Circuitous','Shelf Life','Bounce Back','Headbanger'];
+                    'Circuitous','Shelf Life','Bounce Back','Headbanger', 'Pipe','Animal Farm','Steep Corner',
+                    'Zig-Zag','Bumpy Journey','Labyrinth Pro','Fruit in the Den','Jaws','Curvaceous',
+                    'Haircut','Double Trouble','Framework','Enduro','He He','Freefall','Sink','Bowling',
+                    'Enigma','Downhill','What the Heck','Expert System','Tricks Abound','Hang Tight',
+                    'Hooked','Apple Harvest'];
     return n + '. ' + internals[n+1] + ': ';
   };
 })();
