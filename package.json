@@ -24,6 +24,7 @@
     "express": "^4.13.3",
     "irc": "^0.4.0",
     "irc-colors": "^1.2.0",
+    "mathjs": "^2.4.1",
     "nconf": "^0.8.2",
     "request": "^2.65.0",
     "require": "^2.4.20",
@@ -32,9 +33,6 @@
   "devDependencies": {
     "eslint": "^1.6.0",
     "gulp": "^3.9.0",
-    "gulp-autoprefixer": "^3.0.2",
-    "gulp-concat": "^2.6.0",
-    "gulp-sass": "^2.0.4",
     "mocha": "^2.3.3"
   }
 }
