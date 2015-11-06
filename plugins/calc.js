@@ -7,23 +7,23 @@ module.exports = (function () {
     var regex = /^!(calc|c)\s+(.+)/i;
 
     bot.on('message', function(from, to, text) {
-      if (to === bot.nick) { // pm instead of channel
-        to = from;
-      }
       var result = regex.exec(text);
       if (result && result[2]) {
-        calculate(result[2], bot, to); // thanks to async hell, no idea how to do this better?
+        calculate(result[2], bot, to, from); // thanks to async hell, no idea how to do this better?
       }
     });
   };
 
-  function calculate(text, bot, to) {
+  function calculate(text, bot, to, from) {
     var math = require('mathjs');
+    if (to === bot.nick) { // pm instead of channel
+      to = from;
+    }
     try {
       var calculationResult = math.format(math.eval(text), {precision: 14});
-      bot.say(to, to + ', ' + calculationResult);
+      bot.say(to, from + ', ' + calculationResult);
     } catch(error) {
-      bot.say(to, to + ', Error: Dunno.');
+      bot.say(to, from + ', Error: Dunno.');
     }
   };
 })();
