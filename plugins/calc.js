@@ -21,9 +21,9 @@ module.exports = (function () {
     var math = require('mathjs');
     try {
       var calculationResult = math.format(math.eval(text), {precision: 14});
-      bot.say(to, calculationResult);
+      bot.say(to, to + ', ' + calculationResult);
     } catch(error) {
-      bot.say(to, 'Error: Dunno.');
+      bot.say(to, to + ', Error: Dunno.');
     }
   };
 })();
