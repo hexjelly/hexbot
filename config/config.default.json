@@ -26,5 +26,10 @@
     "admin": "hexjelly",
     "adminPassword": "admin"
   },
-  "ignoredPlugins": ["bear"]
+  "ignoredPlugins": ["bear"],
+  "plugins": {
+    "translate": {
+      "APIKey": ""
+    }
+  }
 }

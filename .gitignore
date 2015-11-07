@@ -28,3 +28,6 @@ node_modules
 
 # User overridden config
 config/config.user.json
+
+# Temporary testing file
+test.js

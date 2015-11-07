@@ -32,7 +32,7 @@
 
   // load plugins
   bot.use = function use(plugin) {
-    plugin(bot);
+    plugin(bot, nconf);
   };
 
   bot.loadPlugins = function loadPlugins() {
