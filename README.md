@@ -20,21 +20,26 @@ weather.js  | request
 
 ## calc.js
 **![c|calc] expression**
+
 Uses the excellent [mathjs](http://mathjs.org/) module, so it supports a broad array of expression syntax which is just passed to the mathjs module's .eval method.
 
 ## elma_wrs.js
 **!wr [0]1-54**
+
 Most likely of no use to anyone else. Fetches the current world record of one of the 54 internal Elasto Mania levels from [Moposite's WR page](http://www.moposite.com/records_elma_wrs.php).
 
 ## isup.js
 **!isup [http|https][://][subdomain]domain.tld**
+
 Really basic function utilizing the request module and just checking for a 200 response code from the site. Simple support for mangled urls.
 
 ## translate.js
 **!tr :en [:jp] translation text**
+
 Uses the [Yandex](https://www.yandex.com/) translation API. If only supplied one language code, it will try to use auto-detection to get the original language.
 Important to note that you need to add your own API key for this plugin. You can set this in the config file. Make sure **not** to put it in the default config file if you plan to fork the repo.
 
 ## weather.js
 **!weather city|country**
+
 Uses the [Yahoo weather API](https://weather.yahoo.com/). No API key needed.
