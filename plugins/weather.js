@@ -19,7 +19,7 @@ module.exports = (function () {
 
   function weather(location, bot, to) {
     var request = require('request');
-    var url = "https://query.yahooapis.com/v1/public/yql?q=select%20location%2C%20units%2C%20wind%2C%20atmosphere%2C%20item.condition%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22" + location + "%22)%20and%20u%3D%22c%22&format=json"
+    var url = "https://query.yahooapis.com/v1/public/yql?q=select%20location%2C%20units%2C%20wind%2C%20atmosphere%2C%20item.condition%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22" + location + "%22)%20and%20u%3D%22c%22&format=json";
 
     request(url, function (error, response, body) {
       if (!error && response.statusCode == 200) {
