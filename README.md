@@ -17,6 +17,7 @@ elma_wrs.js  | request, cheerio
 isup.js  | request
 translate.js  | request
 weather.js  | request
+wikipedia.js | request
 
 ## calc.js
 **![c|calc] expression**
@@ -43,3 +44,8 @@ Important to note that you need to add your own API key for this plugin. You can
 **!weather city|country**
 
 Uses the [Yahoo weather API](https://weather.yahoo.com/). No API key needed.
+
+## wikipedia.js
+**!wik[i] search**
+
+Uses the Wikipedia API. No API key needed.
