@@ -30,6 +30,10 @@
   "plugins": {
     "translate": {
       "APIKey": ""
+    },
+    "dictionary": {
+      "dictionaryAPIKey": "",
+      "thesaurus": ""
     }
   }
 }

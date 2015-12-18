@@ -27,7 +27,7 @@ module.exports = (function () {
         if (weather.query.count > 0) {
           weather = weather.query.results.channel;
               var location = weather.location.city == weather.location.country ? weather.location.country : weather.location.city + ', ' + weather.location.country ;
-              var result = location + ': ' + weather.item.condition.temp + '°C ' + weather.item.condition.text + ', ' + weather.atmosphere.humidity + '% humidity, ' + weather.wind.chill + '°C ' + weather.wind.speed + 'km/h winds';
+              var result = location + ': ' + weather.item.condition.temp + '°C ' + weather.item.condition.text + ', ' + weather.atmosphere.humidity + '% humidity, ' + weather.wind.chill + '°C ' + Math.round(parseInt(weather.wind.speed)*0.27777777777778) + 'm/s winds';
               bot.say(to, result);
         } else {
           bot.say(to, 'Location not found.');
