@@ -14,6 +14,7 @@ Plugin  | Node modules
 ------------- | -------------
 calc.js  | mathjs
 elma_wrs.js  | request, cheerio
+imdb.js | request, cheerio
 isup.js  | request
 translate.js  | request
 weather.js  | request
@@ -28,6 +29,11 @@ Uses the excellent [mathjs](http://mathjs.org/) module, so it supports a broad a
 **!wr [0]1-54**
 
 Most likely of no use to anyone else. Fetches the current world record of one of the 54 internal Elasto Mania levels from [Moposite's WR page](http://www.moposite.com/records_elma_wrs.php).
+
+## imdb.js
+**Passive listener**
+
+Gets the IMDb title, year and rating for any IMDb links in channel.
 
 ## isup.js
 **!isup [http|https][://][subdomain]domain.tld**
