@@ -4,7 +4,7 @@
 
 module.exports = (function () {
   return function init(bot) {
-    var regex = /(!imdb)\s(.*)|.*imdb\.com\/title\/tt(\d{7}).*/i;
+    var regex = /(^!imdb)\s(.*)|.*imdb\.com\/title\/tt(\d{7}).*/i;
 
     bot.on('message', function(from, to, text) {
       if (to === bot.nick) { // pm instead of channel
