@@ -59,3 +59,12 @@ Uses the [Yahoo weather API](https://weather.yahoo.com/). No API key needed.
 **!wik[i] search**
 
 Uses the Wikipedia API. No API key needed.
+
+## youtube.js
+**Passive listener**
+
+Gets the Youtube title and duration for links in channel.
+
+**!youtube|!yt search**
+
+Gives the first search result for a query and display it like the passive listener.
