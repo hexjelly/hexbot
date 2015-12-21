@@ -35,6 +35,10 @@ Most likely of no use to anyone else. Fetches the current world record of one of
 
 Gets the IMDb title, year and rating for any IMDb links in channel.
 
+**!imdb title**
+
+Uses the extremely simple IMDb search and displays the first result in the same format as the passive listener, and adds a link to it.
+
 ## isup.js
 **!isup [http|https][://][subdomain]domain.tld**
 
