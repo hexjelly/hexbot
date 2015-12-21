@@ -19,7 +19,7 @@ module.exports = (function () {
     });
   };
 
-  function getIMDb(tt, bot, to) {
+  function getIMDb(tt, bot, to, link) {
     var request = require('request');
     var cheerio = require('cheerio');
     var url = 'http://akas.imdb.com/title/tt' + tt;
@@ -32,7 +32,7 @@ module.exports = (function () {
         var name = result[1] || 'Unknown';
         var year = result[2] || '(????)'
         var rating = $('span[itemprop=ratingValue]').text() || '?';
-        bot.say(to, "[IMDb] " + name + " " + year + " - " + rating + "/10");
+        bot.say(to, "[IMDb] " + name + " " + year + " - " + rating + "/10" + (link ? " http://www.imdb.com/title/tt" + tt + "/" : ""));
       }
     });
   };
@@ -47,7 +47,7 @@ module.exports = (function () {
           var $ = cheerio.load(body);
           var searchResult = /tt(\d{7})/.exec($('td.result_text a').attr('href'));
           if (searchResult && searchResult[1]) {
-            getIMDb(searchResult[1], bot, to);
+            getIMDb(searchResult[1], bot, to, true);
           } else {
             bot.say(to, "No search results for '" + search + "'.")
           }
