@@ -19,6 +19,7 @@ isup.js  | request
 translate.js  | request
 weather.js  | request
 wikipedia.js | request
+youtube.js | request
 
 ## calc.js
 **![c|calc] expression**
@@ -63,8 +64,8 @@ Uses the Wikipedia API. No API key needed.
 ## youtube.js
 **Passive listener**
 
-Gets the Youtube title and duration for links in channel.
+Gets the Youtube title and duration for links in channel. Requires Youtube API v3 key.
 
 **!youtube|!yt search**
 
-Gives the first search result for a query and display it like the passive listener.
+Gives the first search result for a query and display it like the passive listener. Requires Youtube API v3 key.
