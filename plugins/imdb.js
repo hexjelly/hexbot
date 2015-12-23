@@ -12,7 +12,7 @@ module.exports = (function () {
       }
       var result = regex.exec(text);
       if (result && result[1] != "!imdb") {
-        getIMDb(result[1], bot, to); // thanks to async hell, no idea how to do this better?
+        getIMDb(result[3], bot, to); // thanks to async hell, no idea how to do this better?
       } else if (result && result[1] && result[2]) {
         searchIMDb(result[2], bot, to);
       }
