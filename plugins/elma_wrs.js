@@ -2,22 +2,20 @@
 
 'use strict';
 
-module.exports = (function () {
-  return function init(bot) {
-    var regex = /^!wr\s*0*(\d*)$/i; // matches lines starting with '!wr' followed by optional whitespace, optional 0s, then digit(s)
+function init (bot) {
+  var regex = /^!wr\s*0*(\d*)$/i; // matches lines starting with '!wr' followed by optional whitespace, optional 0s, then digit(s)
 
-    bot.on('message', function(from, to, text) {
-      if (to === bot.nick) { // pm instead of channel
-        to = from;
-      }
-      var result = regex.exec(text);
-      if (result && result[1] <= 54 && result[1] >= 1) {
-        getWR(result[1], bot, to); // thanks to async hell, no idea how to do this better?
-      }
-    });
-  };
+  bot.on('message', function(from, to, text) {
+    if (to === bot.nick) { // pm instead of channel
+      to = from;
+    }
+    var result = regex.exec(text);
+    if (result && result[1] <= 54 && result[1] >= 1) {
+      getWR(result[1], to);
+    }
+  });
 
-  function getWR(n, bot, to) {
+  function getWR(n, to) {
     var request = require('request');
     var cheerio = require('cheerio');
     var url = 'http://www.moposite.com/records_elma_wrs.php';
@@ -44,4 +42,6 @@ module.exports = (function () {
       }
     });
   };
-})();
+};
+
+module.exports = init;

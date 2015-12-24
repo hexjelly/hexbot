@@ -2,24 +2,22 @@
 
 'use strict';
 
-module.exports = (function () {
-  return function init(bot) {
-    var regex = /^!wiki?\s+(.+)/i;
+function init (bot) {
+  var regex = /^!wiki?\s+(.+)/i;
 
-    bot.on('message', function(from, to, text) {
-      if (to === bot.nick) { // pm instead of channel
-        to = from;
-      }
-      var result = regex.exec(text);
-      if (result) {
-        wiki(result[1], bot, to); // thanks to async hell, no idea how to do this better?
-      }
-    });
-  };
+  bot.on('message', function(from, to, text) {
+    if (to === bot.nick) { // pm instead of channel
+      to = from;
+    }
+    var result = regex.exec(text);
+    if (result) {
+      wiki(result[1], to);
+    }
+  });
 
-  function wiki(article, bot, to) {
+  function wiki(article, to) {
     var request = require('request');
-    var url = "https://en.wikipedia.org/w/api.php?format=json&action=opensearch&namespace=0&search=" + article + "&limit=1";
+    var url = "https://en.wikipedia.org/w/api.php?format=json&action=opensearch&namespace=0&search=" + encodeURIComponent(article) + "&limit=1";
 
     request(url, function (error, response, body) {
       if (!error && response.statusCode == 200) {
@@ -48,4 +46,6 @@ module.exports = (function () {
       }
     });
   };
-})();
+};
+
+module.exports = init;

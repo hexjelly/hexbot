@@ -2,19 +2,17 @@
 
 'use strict';
 
-module.exports = (function () {
-  return function init(bot) {
-    var regex = /^!(calc|c)\s+(.+)/i;
+function init (bot) {
+  var regex = /^!(calc|c)\s+(.+)/i;
 
-    bot.on('message', function(from, to, text) {
-      var result = regex.exec(text);
-      if (result && result[2]) {
-        calculate(result[2], bot, to, from); // thanks to async hell, no idea how to do this better?
-      }
-    });
-  };
+  bot.on('message', function(from, to, text) {
+    var result = regex.exec(text);
+    if (result) {
+      calculate(result[2], to, from);
+    }
+  });
 
-  function calculate(text, bot, to, from) {
+  function calculate(text, to, from) {
     var math = require('mathjs');
     if (to === bot.nick) { // pm instead of channel
       to = from;
@@ -26,4 +24,6 @@ module.exports = (function () {
       bot.say(to, from + ', Error: Dunno.');
     }
   };
-})();
+};
+
+module.exports = init;

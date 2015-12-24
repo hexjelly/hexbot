@@ -2,34 +2,32 @@
 
 'use strict';
 
-module.exports = (function () {
-  return function init(bot, nconf) {
-    var regex = /^!tr\s+:([a-z]{2})\s+(:([a-z]{2})\s+)?(.+)$/i; // --> !tr :en [:jp] text to translate
-    var APIKey = nconf.get('plugins').translate.APIKey;
-    // yandex API error codes
-    var codes = {
-      "200": "Operation completed successfully",
-      "401": "Invalid API key",
-      "402": "Blocked API key",
-      "403": "Exceeded the daily limit on the number of requests",
-      "404": "Exceeded the daily limit on the amount of translated text",
-      "413": "Exceeded the maximum text size",
-      "422": "The text cannot be translated",
-      "501": "The specified translation direction is not supported"
-    };
-
-    bot.on('message', function(from, to, text) {
-      var result = regex.exec(text);
-      if (result) {
-        var language = result[1] + (result[3] ? '-' + result[3] : '');
-        var translateText = result[4];
-        var url = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + APIKey + "&text=" + translateText + "&lang=" + language + "&options=1";
-        translate(url, translateText, bot, to, from); // thanks to async hell, no idea how to do this better?
-      }
-    });
+function init (bot, nconf) {
+  var regex = /^!tr\s+(?:\:([a-z]{2})\s*)?(?:\:([a-z]{2})\s*)?(.+)$/i; // --> !tr [:en] [:jp] text to translate
+  var APIKey = nconf.get('plugins').translate.APIKey;
+  // yandex API error codes
+  var codes = {
+    "200": "Operation completed successfully",
+    "401": "Invalid API key",
+    "402": "Blocked API key",
+    "403": "Exceeded the daily limit on the number of requests",
+    "404": "Exceeded the daily limit on the amount of translated text",
+    "413": "Exceeded the maximum text size",
+    "422": "The text cannot be translated",
+    "501": "The specified translation direction is not supported"
   };
 
-  function translate(url, text, bot, to, from) {
+  bot.on('message', function(from, to, text) {
+    var result = regex.exec(text);
+    if (result) {
+      var language = (result[1] && !result[2] ? result[1] : (result[2] ? result[1] + '-' + result[2] : 'en'));
+      var translateText = result[3];
+      var url = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + APIKey + "&text=" + encodeURIComponent(translateText) + "&lang=" + language + "&options=1";
+      translate(url, translateText, to, from);
+    }
+  });
+
+  function translate(url, text, to, from) {
     var request = require('request');
 
     if (to === bot.nick) { // pm instead of channel
@@ -48,4 +46,6 @@ module.exports = (function () {
       }
     });
   };
-})();
+};
+
+module.exports = init;

@@ -46,7 +46,6 @@
           bot.use(require(root + '/' + stat.name));
         } catch (err) {
           console.error(err);
-          console.log('----------------------');
         }
       }
       next();

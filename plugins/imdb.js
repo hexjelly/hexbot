@@ -2,24 +2,22 @@
 
 'use strict';
 
-module.exports = (function () {
-  return function init(bot) {
-    var regex = /(^!imdb)\s(.*)|.*imdb\.com\/title\/tt(\d{7}).*/i;
+function init (bot) {
+  var regex = /^!imdb\s(.*)|.*imdb\.com\/title\/tt(\d{7}).*/i;
 
-    bot.on('message', function(from, to, text) {
-      if (to === bot.nick) { // pm instead of channel
-        to = from;
-      }
-      var result = regex.exec(text);
-      if (result && result[1] != "!imdb") {
-        getIMDb(result[3], bot, to); // thanks to async hell, no idea how to do this better?
-      } else if (result && result[1] && result[2]) {
-        searchIMDb(result[2], bot, to);
-      }
-    });
-  };
+  bot.on('message', function(from, to, text) {
+    if (to === bot.nick) { // pm instead of channel
+      to = from;
+    }
+    var result = regex.exec(text);
+    if (result && result[1]) {
+      searchIMDb(result[1], to); // thanks to async hell, no idea how to do this better?
+    } else if (result && result[2]) {
+      getIMDb(result[2], to);
+    }
+  });
 
-  function getIMDb(tt, bot, to, link) {
+  function getIMDb(tt, to, link) {
     var request = require('request');
     var cheerio = require('cheerio');
     var url = 'http://akas.imdb.com/title/tt' + tt;
@@ -37,7 +35,7 @@ module.exports = (function () {
     });
   };
 
-  function searchIMDb(search, bot, to) {
+  function searchIMDb(search, to) {
     var request = require('request');
     var cheerio = require('cheerio');
     var url = "http://www.imdb.com/find?q=" + encodeURIComponent(search) + "&s=tt";
@@ -47,7 +45,7 @@ module.exports = (function () {
           var $ = cheerio.load(body);
           var searchResult = /tt(\d{7})/.exec($('td.result_text a').attr('href'));
           if (searchResult && searchResult[1]) {
-            getIMDb(searchResult[1], bot, to, true);
+            getIMDb(searchResult[1], to, true);
           } else {
             bot.say(to, "No search results for '" + search + "'.")
           }
@@ -55,4 +53,6 @@ module.exports = (function () {
     });
 
   };
-})();
+};
+
+module.exports = init;
