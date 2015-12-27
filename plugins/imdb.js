@@ -11,7 +11,7 @@ function init (bot) {
     }
     var result = regex.exec(text);
     if (result && result[1]) {
-      searchIMDb(result[1], to); // thanks to async hell, no idea how to do this better?
+      searchIMDb(result[1], to);
     } else if (result && result[2]) {
       getIMDb(result[2], to);
     }
