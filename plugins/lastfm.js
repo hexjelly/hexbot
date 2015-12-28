@@ -4,7 +4,7 @@
 
 function init (bot, nconf) {
   var APIKey = nconf.get('plugins').lastfm.APIKey;
-  var regex = /^!(?:lastfm|lfm)\s+(.+)$/i;
+  var regex = /^!(?:lastfm|lfm)(?:\s+(.+))?$/i;
 
   bot.on('message', function(from, to, text) {
     if (to === bot.nick) { // pm instead of channel
@@ -12,7 +12,7 @@ function init (bot, nconf) {
     }
     var result = regex.exec(text);
     if (result) {
-      lastfm(result[1], to);
+      lastfm((result[1] ? result[1] : from) , to);
     }
   });
 
