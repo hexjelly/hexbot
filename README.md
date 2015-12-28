@@ -13,6 +13,7 @@ You can forego some node.js modules if you don't plan to use certain plugins:
 Plugin  | Node modules
 ------------- | -------------
 calc.js  | mathjs
+dictionary.js | request
 elma_wrs.js  | request, cheerio
 etym.js | request, cheerio
 imdb.js | request, cheerio
@@ -26,6 +27,11 @@ youtube.js | request
 **![c|calc] expression**
 
 Uses the excellent [mathjs](http://mathjs.org/) module, so it supports a broad array of expression syntax which is just passed to the mathjs module's .eval method.
+
+## dictionary.js
+**!(dict|define|def|dic|wikt|wt) word**
+
+Uses http://dictionaryapi.net/ to lookup definitions for English words. Gets the first definition returned ignoring its part of speech; lists a max of 4 definitions for it.
 
 ## elma_wrs.js
 **!wr [0]1-54**
