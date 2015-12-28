@@ -19,6 +19,8 @@
     nconf.get('irc')
   );
 
+  bot.setMaxListeners(20);
+
   console.log('connecting to %s ...', nconf.get('hexbot').server);
 
   // core handlers
