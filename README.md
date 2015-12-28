@@ -18,6 +18,7 @@ elma_wrs.js  | request, cheerio
 etym.js | request, cheerio
 imdb.js | request, cheerio
 isup.js  | request
+lastfm.js | request
 translate.js  | request
 weather.js  | request
 wikipedia.js | request
@@ -56,6 +57,11 @@ Uses the extremely simple IMDb search and displays the first result in the same 
 **!isup [http|https][://][subdomain]domain.tld**
 
 Really basic function utilizing the request module and just checking for a 200 response code from the site. Simple support for mangled urls.
+
+## lastfm.js
+**!(lastfm|lfm) user**
+
+Shows the currently playing track of user, or if no currently playing track; the last one played.
 
 ## translate.js
 **!tr [:en] [:jp] translation text**
