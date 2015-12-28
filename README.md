@@ -61,7 +61,7 @@ Really basic function utilizing the request module and just checking for a 200 r
 ## lastfm.js
 **!(lastfm|lfm) [user]**
 
-Shows the currently playing track of user (defaults to nick if nothing specified), or if no currently playing track; the last one played.
+Shows the currently playing track of user (defaults to nick if nothing specified), or if no currently playing track; the last one played. Requires API key.
 
 ## translate.js
 **!tr [:en] [:jp] translation text**
