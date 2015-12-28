@@ -18,7 +18,7 @@ function init (bot) {
 
   function dict (word, to) {
     var request = require('request');
-    var url = "http://dictionaryapi.net/api/definition/" + word;
+    var url = "http://dictionaryapi.net/api/definition/" + encodeURIComponent(word);
 
     request(url, function (error, response, body) {
       if (!error && response.statusCode == 200) {
