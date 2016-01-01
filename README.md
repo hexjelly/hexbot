@@ -13,6 +13,7 @@ You can forego some node.js modules if you don't plan to use certain plugins:
 Plugin  | Node modules
 ------------- | -------------
 calc.js  | mathjs
+currency.js | request
 dictionary.js | request
 elma_wrs.js  | request, cheerio
 etym.js | request, cheerio
@@ -28,6 +29,11 @@ youtube.js | request
 **![c|calc] expression**
 
 Uses the excellent [mathjs](http://mathjs.org/) module, so it supports a broad array of expression syntax which is just passed to the mathjs module's .eval method.
+
+## currency.js
+**![cur|curr|currency] [n] USD to EUR**
+
+Uses http://fixer.io/ to convert currencies.
 
 ## dictionary.js
 **!(dict|define|def|dic|wikt|wt) word**
