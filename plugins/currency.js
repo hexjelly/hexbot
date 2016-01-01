@@ -21,7 +21,8 @@ function init (bot) {
       if (!error && response.statusCode == 200) {
         var currencies = JSON.parse(body);
         if (Object.keys(currencies.rates).length > 0) {
-          bot.say(to, amount + " " + base.toUpperCase() + " = " + (amount * currencies.rates[convert.toUpperCase()]) + " " + convert.toUpperCase());
+          var conversion = Math.round((amount * currencies.rates[convert.toUpperCase()]) * 100) / 100;
+          bot.say(to, amount + " " + base.toUpperCase() + " = " + conversion + " " + convert.toUpperCase());
         } else {
           bot.say(to, "User error");
         }
