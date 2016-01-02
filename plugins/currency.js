@@ -8,11 +8,16 @@ function init (bot) {
   bot.on('message', function(from, to, text) {
     var result = regex.exec(text);
     if (result) {
-      currency(result[1], result[2], result[3], to);
+      if (to === bot.nick) { // pm instead of channel
+        to = from;
+      }
+      currency(result[1], result[2], result[3], function (result) {
+        bot.say(to, result);
+      });
     }
   });
 
-  function currency (amount, base, convert, to) {
+  function currency (amount, base, convert, callback) {
     var request = require('request');
     var amount = parseFloat(amount) || 1;
     var url = "https://api.fixer.io/latest?base=" + base.toUpperCase() + "&symbols=" + convert.toUpperCase() ;
@@ -21,9 +26,9 @@ function init (bot) {
       if (!error && response.statusCode == 200) {
         var currencies = JSON.parse(body);
         if (Object.keys(currencies.rates).length > 0) {
-          bot.say(to, amount + " " + base.toUpperCase() + " = " + (amount * currencies.rates[convert.toUpperCase()]) + " " + convert.toUpperCase());
+          callback(amount + " " + base.toUpperCase() + " = " + (amount * currencies.rates[convert.toUpperCase()]) + " " + convert.toUpperCase());
         } else {
-          bot.say(to, "User error");
+          callback("User error");
         }
       }
     });
