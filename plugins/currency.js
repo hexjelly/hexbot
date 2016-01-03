@@ -5,7 +5,7 @@
 function init (bot) {
   var regex = /^!(?:curr|cur|currency)\s+(.+)?([a-z]{3}).*([a-z]{3})$/i;
 
-  bot.on('message', function(from, to, text) {
+  bot.on('message', function (from, to, text) {
     var result = regex.exec(text);
     if (result) {
       if (to === bot.nick) { // pm instead of channel

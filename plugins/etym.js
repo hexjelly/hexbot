@@ -5,7 +5,7 @@
 function init (bot) {
   var regex = /^!etym?\s+([^:]+)(?:\s+\:(.+))?$/i;
 
-  bot.on('message', function(from, to, text) {
+  bot.on('message', function (from, to, text) {
     var result = regex.exec(text);
     if (result) {
       if (to === bot.nick) { // pm instead of channel
@@ -17,7 +17,7 @@ function init (bot) {
     }
   });
 
-  function getEtym(word, modifier, callback) {
+  function getEtym (word, modifier, callback) {
     var request = require('request');
     var cheerio = require('cheerio');
     var url = 'http://www.etymonline.com/index.php?allowed_in_frame=0&term=' + encodeURIComponent(word);
@@ -29,7 +29,7 @@ function init (bot) {
         var $ = cheerio.load(body);
         if (modifier) {
           var search = word + modifier;
-          $('dt').each(function(i, elem) {
+          $('dt').each(function (i, elem) {
             if ($(this).text().replace(/\W/g, '').toLowerCase() == search.replace(/\W/g, '').toLowerCase()) {
                 term = $(this).children('a').eq(0).text();
                 definition = $(this).next().text();

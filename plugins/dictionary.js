@@ -5,7 +5,7 @@
 function init (bot) {
   var regex = /^!(?:dict|define|def|dic|wikt|wt)\s+(.*)$/i;
 
-  bot.on('message', function(from, to, text) {
+  bot.on('message', function (from, to, text) {
     var result = regex.exec(text);
     if (result) {
       if (to === bot.nick) { // pm instead of channel

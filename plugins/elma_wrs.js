@@ -5,7 +5,7 @@
 function init (bot) {
   var regex = /^!wr\s*0*(\d*)$/i; // matches lines starting with '!wr' followed by optional whitespace, optional 0s, then digit(s)
 
-  bot.on('message', function(from, to, text) {
+  bot.on('message', function (from, to, text) {
     var result = regex.exec(text);
     if (result && result[1] <= 54 && result[1] >= 1) {
       if (to === bot.nick) { // pm instead of channel
@@ -17,7 +17,7 @@ function init (bot) {
     }
   });
 
-  function getWR(n, callback) {
+  function getWR (n, callback) {
     var request = require('request');
     var cheerio = require('cheerio');
     var url = 'http://www.moposite.com/records_elma_wrs.php';
