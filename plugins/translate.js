@@ -17,32 +17,33 @@ function init (bot, nconf) {
     "501": "The specified translation direction is not supported"
   };
 
-  bot.on('message', function(from, to, text) {
+  bot.on('message', function (from, to, text) {
     var result = regex.exec(text);
     if (result) {
+      if (to === bot.nick) { // pm instead of channel
+        to = from;
+      }
       var language = (result[1] && !result[2] ? result[1] : (result[2] ? result[1] + '-' + result[2] : 'en'));
       var translateText = result[3];
       var url = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + APIKey + "&text=" + encodeURIComponent(translateText) + "&lang=" + language + "&options=1";
-      translate(url, translateText, to, from);
+      translate(url, translateText, function (result) {
+        bot.say(to, from + result);
+      });
     }
   });
 
-  function translate(url, text, to, from) {
+  function translate (url, text, callback) {
     var request = require('request');
-
-    if (to === bot.nick) { // pm instead of channel
-      to = from;
-    }
     request(url, function (error, response, body) {
       if (!error && response.statusCode == 200) {
         body = JSON.parse(body);
         if (body.code == 200) {
-          bot.say(to, from + ', ' + body.text);
+          callback(', ' + body.text);
         } else {
-          bot.say(to, from + ', ' + body.code + ': ' + codes[body.code]);
+          callback(', ' + body.code + ': ' + codes[body.code]);
         }
       } else {
-        bot.say(to, from + ", couldn't connect to translation API. Server responded with code " + response.statusCode);
+        callback(", couldn't connect to translation API. Server responded with code " + response.statusCode);
       }
     });
   };

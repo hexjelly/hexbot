@@ -6,19 +6,23 @@ function init (bot, nconf) {
   var APIKey = nconf.get('plugins').youtube.APIKey;
   var regex = /(?:^!youtube|^!yt)\s(.+)|(?:http(?:s|).{3}|)(?:www.|)(?:youtube.com\/watch\?.*v=|youtu.be\/)([\w-]{11})/i;
 
-  bot.on('message', function(from, to, text) {
+  bot.on('message', function (from, to, text) {
     if (to === bot.nick) { // pm instead of channel
       to = from;
     }
     var result = regex.exec(text);
     if (result && result[2]) { // normal link
-      getYT(result[2], to);
+      getYT(result[2], false, function (result) {
+        bot.say(to, result);
+      });
     } else if (result && result[1]) { // search
-      searchYT(result[1], to);
+      searchYT(result[1], function (result) {
+        bot.say(to, result);
+      });
     }
   });
 
-  function getYT (youtubeID, to, link) {
+  function getYT (youtubeID, link, callback) {
     var request = require('request');
     var url = "https://www.googleapis.com/youtube/v3/videos?id=" + youtubeID + "&key=" + APIKey + "&fields=items(snippet(title),contentDetails(duration))&part=snippet,contentDetails";
     var durationRegex = /P(?:(?:(\d+)W)?(?:(\d+)DT|T))?(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/i;
@@ -41,12 +45,12 @@ function init (bot, nconf) {
           var durationMins = (duration[4] ? pad(duration[4],2) + ":" : "00:");
           var durationSecs = (duration[5] ? pad(duration[5],2) : "00");
 
-          bot.say(to, "[YouTube] " + title + " (" + durationWeeks + durationDays + durationHours + durationMins + durationSecs + ")" + (link ? " https://www.youtube.com/watch?v=" + youtubeID : ""));
+          callback("[YouTube] " + title + " (" + durationWeeks + durationDays + durationHours + durationMins + durationSecs + ")" + (link ? " https://www.youtube.com/watch?v=" + youtubeID : ""));
       }
     });
   };
 
-  function searchYT (search, to) {
+  function searchYT (search, callback) {
     var request = require('request');
     var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=" + encodeURIComponent(search) + "&type=video&key=" + APIKey;
 
@@ -54,9 +58,9 @@ function init (bot, nconf) {
       if (!error && response.statusCode == 200) {
           var youtube = JSON.parse(body);
           if (youtube.items[0]) {
-            getYT(youtube.items[0].id.videoId, to, true);
+            getYT(youtube.items[0].id.videoId, true, callback);
           } else {
-            bot.say(to, "No search results for '" + search + "'.")
+            callback("No search results for '" + search + "'.")
           }
       }
     });

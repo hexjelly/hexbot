@@ -26,14 +26,11 @@
     "admin": "hexjelly",
     "adminPassword": "admin"
   },
+  "commandPrefix": "!",
   "ignoredPlugins": ["bear"],
   "plugins": {
     "translate": {
       "APIKey": ""
-    },
-    "dictionary": {
-      "dictionaryAPIKey": "",
-      "thesaurus": ""
     },
     "youtube": {
       "APIKey": ""

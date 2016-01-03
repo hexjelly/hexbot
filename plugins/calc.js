@@ -3,25 +3,27 @@
 'use strict';
 
 function init (bot) {
-  var regex = /^!(calc|c)\s+(.+)/i;
+  var regex = /^!(?:calc|c)\s+(.+)/i;
 
-  bot.on('message', function(from, to, text) {
+  bot.on('message', function (from, to, text) {
     var result = regex.exec(text);
     if (result) {
-      calculate(result[2], to, from);
+      if (to === bot.nick) { // pm instead of channel
+        to = from;
+      };
+      calculate(result[1], from, function (result) {
+        bot.say(to, result);
+      });
     }
   });
 
-  function calculate(text, to, from) {
+  function calculate (text, from, callback) {
     var math = require('mathjs');
-    if (to === bot.nick) { // pm instead of channel
-      to = from;
-    }
     try {
       var calculationResult = math.format(math.eval(text), {precision: 14});
-      bot.say(to, from + ', ' + calculationResult);
+      callback(from + ', ' + calculationResult);
     } catch(error) {
-      bot.say(to, from + ', Error: Dunno.');
+      callback(from + ', Error: Dunno.');
     }
   };
 };

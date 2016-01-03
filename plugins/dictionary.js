@@ -3,20 +3,21 @@
 'use strict';
 
 function init (bot) {
-
   var regex = /^!(?:dict|define|def|dic|wikt|wt)\s+(.*)$/i;
 
-  bot.on('message', function(from, to, text) {
-    if (to === bot.nick) { // pm instead of channel
-      to = from;
-    }
+  bot.on('message', function (from, to, text) {
     var result = regex.exec(text);
     if (result) {
-      dict(result[1], to);
+      if (to === bot.nick) { // pm instead of channel
+        to = from;
+      }
+      dict(result[1], function (result) {
+        bot.say(to, result);
+      });
     }
   });
 
-  function dict (word, to) {
+  function dict (word, callback) {
     var request = require('request');
     var url = "http://dictionaryapi.net/api/definition/" + encodeURIComponent(word);
 
@@ -33,9 +34,9 @@ function init (bot) {
             if (definition.length > 420) {
               definition = definition.substr(0,417) + '...';
             }
-            bot.say(to, definition);
+            callback(definition);
           } else {
-            bot.say(to, "Couldn't find definition for '" + word + "'.");
+            callback("Couldn't find definition for '" + word + "'.");
           }
       }
     });

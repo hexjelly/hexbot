@@ -5,17 +5,19 @@
 function init (bot) {
   var regex = /^!wr\s*0*(\d*)$/i; // matches lines starting with '!wr' followed by optional whitespace, optional 0s, then digit(s)
 
-  bot.on('message', function(from, to, text) {
-    if (to === bot.nick) { // pm instead of channel
-      to = from;
-    }
+  bot.on('message', function (from, to, text) {
     var result = regex.exec(text);
     if (result && result[1] <= 54 && result[1] >= 1) {
-      getWR(result[1], to);
+      if (to === bot.nick) { // pm instead of channel
+        to = from;
+      }
+      getWR(result[1], function (result) {
+        bot.say(to, result);
+      });
     }
   });
 
-  function getWR(n, to) {
+  function getWR (n, callback) {
     var request = require('request');
     var cheerio = require('cheerio');
     var url = 'http://www.moposite.com/records_elma_wrs.php';
@@ -38,7 +40,7 @@ function init (bot) {
         var wrTime = $('td', '.wrtable').eq(elementNumber-1).text();
         var wrHolder = $('td', '.wrtable').eq(elementNumber).text();
         result += wrTime + ' by ' + wrHolder;
-        bot.say(to, result);
+        callback(result);
       }
     });
   };

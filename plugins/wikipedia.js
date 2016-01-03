@@ -5,17 +5,19 @@
 function init (bot) {
   var regex = /^!wiki?\s+(.+)/i;
 
-  bot.on('message', function(from, to, text) {
-    if (to === bot.nick) { // pm instead of channel
-      to = from;
-    }
+  bot.on('message', function (from, to, text) {
     var result = regex.exec(text);
     if (result) {
-      wiki(result[1], to);
+      if (to === bot.nick) { // pm instead of channel
+        to = from;
+      }
+      wiki(result[1], function (result) {
+        bot.say(to, result);
+      });
     }
   });
 
-  function wiki(article, to) {
+  function wiki (article, callback) {
     var request = require('request');
     var url = "https://en.wikipedia.org/w/api.php?format=json&action=opensearch&namespace=0&search=" + encodeURIComponent(article) + "&limit=1";
 
@@ -36,12 +38,12 @@ function init (bot) {
                   // IRC message length limit is 512, take nick/host into account (arbitrarily atm) and shorten extract to fit together with URL
                   extract = extract.substr(0,417-url.length) + '...';
                 }
-                bot.say(to, extract + url);
+                callback(extract + url);
               }
             }
           });
         } else { // no search result
-          bot.say(to, 'No result for "' + article + '".');
+          callback('No result for "' + article + '".');
         }
       }
     });
