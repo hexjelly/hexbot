@@ -15,7 +15,7 @@ function init (bot) {
         bot.say(to, result);
       });
     } else if (result && result[2]) {
-      getIMDb(result[2], function (result) {
+      getIMDb(result[2], false, function (result) {
         bot.say(to, result);
       });
     }

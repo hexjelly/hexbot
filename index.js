@@ -33,7 +33,7 @@
   });
 
   // load plugins
-  bot.use = function use(plugin) {
+  bot.use = function use (plugin) {
     plugin(bot, nconf);
   };
 
@@ -41,7 +41,7 @@
     var walk = require('walk');
     var walker = walk.walk('./plugins', { followLinks: false });
 
-    walker.on('file', function(root, stat, next) {
+    walker.on('file', function (root, stat, next) {
       if (stat.name.slice(-3) === '.js') {
         console.log('loading plugin %s/%s', root, stat.name);
         try {
