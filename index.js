@@ -89,6 +89,7 @@
   // testing plugin handlers
   bot.plugins.load('calc.js', './plugins/calc.js');
   bot.plugins.load('currency.js', './plugins/currency.js');
+  bot.plugins.load('dictionary.js', './plugins/dictionary.js');
   util.log(bot.plugins.list);
 
 })();
