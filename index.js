@@ -4,6 +4,7 @@
   // core requires, initialization, connect
   var irc = require('irc');
   var nconf = require('nconf');
+  var util = require('util');
   nconf.file({ file: getConfigFile() });
 
   function getConfigFile() {
@@ -42,9 +43,13 @@
           if (to === this.nick) { // pm instead of channel
             to = from;
           }
-          plugin.message.handler({ "result": result, "text": text, "to": to, "from": from, "callback": function (result) {
-            bot.say(to, result);
-          }});
+          try {
+            plugin.message.handler({ "result": result, "text": text, "to": to, "from": from, "callback": function (result) {
+              bot.say(to, result);
+            }});
+          } catch (err) {
+            util.log(err);
+          }
         }
       }
     }
