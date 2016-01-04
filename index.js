@@ -78,13 +78,14 @@
       });
     },
     "unload": function (plugin) {
-
+      // unload plugin
     },
     "unloadAll": function () {
-
+      // unload all plugins (?! eh)
     }
   };
 
+  // just testing
   bot.plugins.load('calc', require('./plugins/calc.js'));
   console.log(bot.plugins.list);
 
