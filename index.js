@@ -5,6 +5,7 @@
   var irc = require('irc');
   var nconf = require('nconf');
   var util = require('util');
+  var walk = require('walk');
   nconf.file({ file: getConfigFile() });
 
   function getConfigFile() {
@@ -69,12 +70,11 @@
     },
     "loadAll": function () {
       var self = this;
-      var walk = require('walk');
       var walker = walk.walk('./plugins', { followLinks: false });
 
       walker.on('file', function (root, stat, next) {
         if (stat.name.slice(-3).toLowerCase() === '.js') {
-          self.plugins.load(stat.name, require(root + '/' + stat.name));
+          self.load(stat.name, root + '/' + stat.name);
         }
         next();
       });
@@ -91,13 +91,6 @@
   };
 
   // testing plugin handlers
-  bot.plugins.load('calc.js', './plugins/calc.js');
-  bot.plugins.load('currency.js', './plugins/currency.js');
-  bot.plugins.load('dictionary.js', './plugins/dictionary.js');
-  bot.plugins.load('elma_wrs.js', './plugins/elma_wrs.js');
-  bot.plugins.load('etym.js', './plugins/etym.js');
-  bot.plugins.load('imdb.js', './plugins/imdb.js');
-  bot.plugins.load('isup.js', './plugins/isup.js');
-  bot.plugins.load('lastfm.js', './plugins/lastfm.js');
+  bot.plugins.loadAll();
 
 })();

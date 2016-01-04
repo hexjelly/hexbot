@@ -12,6 +12,7 @@ module.exports = {
       var APIKey = nconf.get('plugins').translate.APIKey;
       var result = params.result;
       var from = params.from;
+      var callback = params.callback;
       // yandex API error codes
       var codes = {
         "200": "Operation completed successfully",
