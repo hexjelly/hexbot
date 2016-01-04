@@ -31,6 +31,9 @@
 
   bot.on('registered', function (message) {
     util.log('Success: Connected!');
+    setTimeout(function () {
+      bot.plugins.unloadAll();
+    }, 1000*30);
   });
 
   bot.on('message', function (from, to, text) {
@@ -62,6 +65,7 @@
     "load": function (name, plugin) {
       try {
         this.list[name] = require(plugin);
+        util.log("Plugin '" + name + "' loaded");
       } catch (err) {
         util.log('Plugin loading error: ' + err);
       }
@@ -79,10 +83,13 @@
       });
     },
     "unload": function (plugin) {
-      // unload plugin
+      delete this.list[plugin];
+      util.log("Plugin '" + plugin + "' unloaded");
     },
     "unloadAll": function () {
-      // unload all plugins (?! eh)
+      for (var plugin in this.list) {
+        this.unload(plugin);
+      }
     }
   };
 
@@ -90,6 +97,5 @@
   bot.plugins.load('calc.js', './plugins/calc.js');
   bot.plugins.load('currency.js', './plugins/currency.js');
   bot.plugins.load('dictionary.js', './plugins/dictionary.js');
-  util.log(bot.plugins.list);
 
 })();
