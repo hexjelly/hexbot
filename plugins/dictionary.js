@@ -2,11 +2,12 @@
 
 'use strict';
 
+var request = require('request');
+
 module.exports = {
   "message": {
     "regex": /^!(?:dict|define|def|dic|wikt|wt)\s+(.*)$/i,
     "handler": function (params) {
-      var request = require('request');
       var word = params.result[1];
       var callback = params.callback;
       var url = "http://dictionaryapi.net/api/definition/" + encodeURIComponent(word);

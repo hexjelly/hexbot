@@ -2,12 +2,13 @@
 
 'use strict';
 
+var request = require('request');
+var cheerio = require('cheerio');
+
 module.exports = {
   "message": {
     "regex": /^!etym?\s+([^:]+)(?:\s+\:(.+))?$/i,
     "handler": function (params) {
-      var request = require('request');
-      var cheerio = require('cheerio');
       var word = params.result[1];
       var modifier = params.result[2];
       var callback = params.callback;

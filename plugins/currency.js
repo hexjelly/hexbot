@@ -2,11 +2,12 @@
 
 'use strict';
 
+var request = require('request');
+
 module.exports = {
   "message": {
     "regex": /^!(?:curr|cur|currency)\s+(.+)?([a-z]{3}).*([a-z]{3})$/i,
     "handler": function (params) {
-      var request = require('request');
       var amount = parseFloat(params.result[1]) || 1;
       var base = params.result[2];
       var convert = params.result[3];

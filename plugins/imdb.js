@@ -2,6 +2,9 @@
 
 'use strict';
 
+var request = require('request');
+var cheerio = require('cheerio');
+
 module.exports = {
   "message": {
     "regex": /^!imdb\s(.*)|.*imdb\.com\/title\/tt(\d{7}).*/i,
@@ -14,8 +17,6 @@ module.exports = {
       }
 
       function getIMDb (tt, link, callback) {
-        var request = require('request');
-        var cheerio = require('cheerio');
         var url = 'http://akas.imdb.com/title/tt' + tt;
         var titleregex = /^(.*)\s(\(.*\))\s-\sIMDb$/;
 
@@ -32,8 +33,6 @@ module.exports = {
       }
 
       function searchIMDb (search, callback) {
-        var request = require('request');
-        var cheerio = require('cheerio');
         var url = "http://www.imdb.com/find?q=" + encodeURIComponent(search) + "&s=tt";
 
         request(url, function (error, response, body) {

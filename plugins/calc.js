@@ -2,11 +2,12 @@
 
 'use strict';
 
+var math = require('mathjs');
+
 module.exports = {
   "message": {
     "regex": /^!(?:calc|c)\s+(.+)/i,
     "handler": function (params) {
-      var math = require('mathjs');
       var from = params.from;
       var result = params.result;
       var callback = params.callback;

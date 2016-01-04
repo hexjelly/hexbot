@@ -31,9 +31,6 @@
 
   bot.on('registered', function (message) {
     util.log('Success: Connected!');
-    setTimeout(function () {
-      bot.plugins.unloadAll();
-    }, 1000*30);
   });
 
   bot.on('message', function (from, to, text) {
@@ -100,5 +97,7 @@
   bot.plugins.load('elma_wrs.js', './plugins/elma_wrs.js');
   bot.plugins.load('etym.js', './plugins/etym.js');
   bot.plugins.load('imdb.js', './plugins/imdb.js');
+  bot.plugins.load('isup.js', './plugins/isup.js');
+  bot.plugins.load('lastfm.js', './plugins/lastfm.js');
 
 })();

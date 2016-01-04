@@ -2,6 +2,9 @@
 
 'use strict';
 
+var request = require('request');
+var cheerio = require('cheerio');
+
 module.exports = {
   "message": {
     "regex": /^!wr\s*0*(\d*)$/i,
@@ -9,8 +12,6 @@ module.exports = {
       var wr = params.result[1];
       var callback = params.callback;
       if (wr <= 54 && wr >= 1) {
-        var request = require('request');
-        var cheerio = require('cheerio');
         var url = 'http://www.moposite.com/records_elma_wrs.php';
         // no point parsing names of levels from the page as they won't change and we already know them
         var internals = ['Warm Up','Flat Track','Twin Peaks','Over and Under','Uphill Battle','Long Haul',
