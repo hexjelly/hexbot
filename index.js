@@ -4,7 +4,7 @@
   // core requires, initialization, connect
   var irc = require('irc');
   var nconf = require('nconf');
-  nconf.file({file: getConfigFile()});
+  nconf.file({ file: getConfigFile() });
 
   function getConfigFile() {
     var overrideConfig = './config/config.user.json';
@@ -32,28 +32,55 @@
     console.log('connected!');
   });
 
-  // load plugins
-  bot.use = function use (plugin) {
-    plugin(bot, nconf);
-  };
-
-  bot.loadPlugins = function loadPlugins() {
-    var walk = require('walk');
-    var walker = walk.walk('./plugins', { followLinks: false });
-
-    walker.on('file', function (root, stat, next) {
-      if (stat.name.slice(-3) === '.js') {
-        console.log('loading plugin %s/%s', root, stat.name);
-        try {
-          bot.use(require(root + '/' + stat.name));
-        } catch (err) {
-          console.error(err);
+  bot.on('message', function (from, to, text) {
+    for (var key in this.plugins.list) {
+      var plugin = this.plugins.list[key];
+      if (plugin.message) {
+        var regex = plugin.message.regex;
+        var result = regex.exec(text);
+        if (result) {
+          if (to === this.nick) { // pm instead of channel
+            to = from;
+          }
+          plugin.message.handler({ "result": result, "text": text, "to": to, "from": from, "callback": function (result) {
+            bot.say(to, result);
+          }});
         }
       }
-      next();
-    });
+    }
+  });
+
+  // plugins
+  bot.plugins = {
+    "list": {},
+    "load": function (name, plugin) {
+      this.list[name] = plugin;
+    },
+    "loadAll": function () {
+      var walk = require('walk');
+      var walker = walk.walk('./plugins', { followLinks: false });
+
+      walker.on('file', function (root, stat, next) {
+        if (stat.name.slice(-3) === '.js') {
+          console.log('loading plugin %s/%s', root, stat.name);
+          try {
+            bot.use(require(root + '/' + stat.name));
+          } catch (err) {
+            console.error(err);
+          }
+        }
+        next();
+      });
+    },
+    "unload": function (plugin) {
+
+    },
+    "unloadAll": function () {
+
+    }
   };
 
-  bot.loadPlugins();
+  bot.plugins.load('calc', require('./plugins/calc.js'));
+  console.log(bot.plugins.list);
 
 })();
