@@ -15,7 +15,7 @@ module.exports = {
         var calculationResult = math.format(math.eval(result[1]), { precision: 14 });
         callback(from + ', ' + calculationResult);
       } catch (err) {
-        callback(from + ', Error: Dunno.');
+        callback(from + ', User error.');
       }
     }
   }
