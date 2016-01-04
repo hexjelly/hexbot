@@ -97,5 +97,8 @@
   bot.plugins.load('calc.js', './plugins/calc.js');
   bot.plugins.load('currency.js', './plugins/currency.js');
   bot.plugins.load('dictionary.js', './plugins/dictionary.js');
+  bot.plugins.load('elma_wrs.js', './plugins/elma_wrs.js');
+  bot.plugins.load('etym.js', './plugins/etym.js');
+  bot.plugins.load('imdb.js', './plugins/imdb.js');
 
 })();

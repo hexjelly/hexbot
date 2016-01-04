@@ -19,7 +19,7 @@ module.exports = {
               definition += dict[0].Word + ' (' + dict[0].PartOfSpeech + '): ';
               for (var i = 1; i < dict[0].Definitions.length + 1 && i < 5; i++) {
                 definition += (i > 1 ? ', ' : '') + (dict[0].Definitions.length > 1 ? i + '. ' : '') + dict[0].Definitions[i-1];
-              };
+              }
 
               if (definition.length > 420) {
                 definition = definition.substr(0,417) + '...';
