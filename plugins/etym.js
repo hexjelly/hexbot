@@ -36,7 +36,7 @@ module.exports = {
           if (term && definition) {
             var result = term + ': ' + definition;
             if (result.length > 420) {
-              result = result.substr(0,416-url.length) + '... ' + url;
+              result = result.replace(/(?:\r\n|\r|\n)/g, '').substr(0,416-url.length) + '... ' + url;
             }
             callback(result);
           } else {

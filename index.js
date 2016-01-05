@@ -90,7 +90,6 @@
     }
   };
 
-  // testing plugin handlers
   bot.plugins.loadAll();
 
 })();
