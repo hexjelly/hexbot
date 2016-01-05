@@ -7,11 +7,11 @@ var cheerio = require('cheerio');
 
 module.exports = {
   "message": {
-    "regex": /(https?\:\/\/)?((?:www)?\S{2,}\.\S{2,})/i,
+    "regex": /((?:https?\:\/\/)|(?:www\.))(\S+\.\S+)/i,
     "handler": function (params) {
       var result = params.result;
       var callback = params.callback;
-      var url = (result[1] ? result[1] + result[2] : 'http://' + result[2]);
+      var url = (result[1] != 'www.' ? result[1] + result[2] : 'http://' + result[2]);
       var ignoreRegex = /^(?:.+\.)?([^\/\?]+\.[^\/\?]+)(?:\/|\?)?.*?$/i;
       var ignore = ['youtube.com','youtu.be','wikipedia.org','imdb.com']; // because i'm too dumb to figure out some non-manual way to do this ._.
       var host = ignoreRegex.exec(result[2]);
