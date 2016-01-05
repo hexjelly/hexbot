@@ -7,7 +7,7 @@ var cheerio = require('cheerio');
 
 module.exports = {
   "message": {
-    "regex": /(https?\:\/\/)?((?:www)?\S*\.\S*)/i,
+    "regex": /(https?\:\/\/)?((?:www)?\S+\.\S+)/i,
     "handler": function (params) {
       var result = params.result;
       var callback = params.callback;
