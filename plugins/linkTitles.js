@@ -7,7 +7,7 @@ var cheerio = require('cheerio');
 
 module.exports = {
   "message": {
-    "regex": /(https?\:\/\/)?((?:www)?\S+\.\S+)/i,
+    "regex": /(https?\:\/\/)?((?:www)?\S{2,}\.\S{2,})/i,
     "handler": function (params) {
       var result = params.result;
       var callback = params.callback;
@@ -33,7 +33,7 @@ module.exports = {
                 }
             }).pipe(file);
           } */
-          if (headRes.headers['content-type'].indexOf('text/html') > -1) {
+          if (headRes && headRes.headers['content-type'].indexOf('text/html') > -1) {
             request(url, function (error, response, body) {
               if (!error && response.statusCode == 200) {
                 //console.log(response);
