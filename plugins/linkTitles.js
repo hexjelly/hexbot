@@ -38,7 +38,7 @@ module.exports = {
               if (!error && response.statusCode == 200) {
                 //console.log(response);
                 var $ = cheerio.load(body);
-                var title = $('title').text();
+                var title = $('title').text().replace(/(?:\r\n|\r|\n)/g, '');
                 if (title) callback('[Title] ' + title);
               }
             });
