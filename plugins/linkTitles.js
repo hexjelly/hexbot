@@ -14,7 +14,8 @@ module.exports = {
       var url = (result[1] != 'www.' ? result[1] + result[2] : 'http://' + result[2]);
       var ignoreRegex = /^(?:.+\.)?([^\/\?]+\.[^\/\?]+)(?:\/|\?)?.*?$/i;
       // because i'm too dumb to figure out some non-manual way to do this ._. ignore sites either handled by other plugins, or has poor titles
-      var ignore = ['youtube.com', 'youtu.be', 'wikipedia.org', 'imdb.com', 'facebook.com'];
+      // move this to config file later!
+      var ignore = ['youtube.com', 'youtu.be', 'wikipedia.org', 'imdb.com', 'facebook.com', 'recsource.tv'];
       var host = ignoreRegex.exec(result[2]);
 
       if (ignore.indexOf(host[1].toLowerCase()) === -1) {
