@@ -12,8 +12,6 @@
     "secure": false,
     "selfSigned": false,
     "certExpired": false,
-    "retryCount": 1000,
-    "retryDelay": 5000,
     "floodProtection": true,
     "floodProtectionDelay": 1000,
     "sasl": false,

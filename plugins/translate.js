@@ -37,7 +37,7 @@ module.exports = {
             callback(from + ', ' + body.code + ': ' + codes[body.code]);
           }
         } else {
-          callback(", couldn't connect to translation API. Server responded with code " + response.statusCode);
+          callback(from + ", couldn't connect to translation API. Server responded with code " + response.statusCode);
         }
       });
     }
