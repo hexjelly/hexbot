@@ -38,7 +38,7 @@ module.exports = {
           } */
 
           // only check for title of html files; indexOf because some sites send additional information in content-type header
-          if (headRes && headRes.headers['content-type'].indexOf('text/html') > -1) {
+          if (headRes.headers['content-type'] && headRes.headers['content-type'].indexOf('text/html') > -1) {
             request(url, function (error, response, body) {
               if (!error && response.statusCode == 200) {
                 var $ = cheerio.load(body);
