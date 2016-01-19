@@ -21,7 +21,7 @@ module.exports = {
       if (ignore.indexOf(host[1].toLowerCase()) === -1) {
         request({ url: url, method: "HEAD" }, function (error, headRes) {
 
-          /* var maxSize = 10485760; might be wise to limit a request attempt's size even if checking for content-type
+          /* var maxSize = 10485760; TODO: might be wise to limit a request attempt's size even if checking for content-type
           var size = headRes.headers['content-length'];
           if (size > maxSize) {
               // too big
