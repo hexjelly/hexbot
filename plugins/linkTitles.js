@@ -19,7 +19,7 @@ module.exports = {
       var host = ignoreRegex.exec(result[2]);
 
       if (ignore.indexOf(host[1].toLowerCase()) === -1) {
-        request({ url: url, method: "HEAD" }, function (err, headRes) {
+        request({ url: url, method: "HEAD" }, function (error, headRes) {
 
           /* var maxSize = 10485760; might be wise to limit a request attempt's size even if checking for content-type
           var size = headRes.headers['content-length'];
@@ -38,7 +38,7 @@ module.exports = {
           } */
 
           // only check for title of html files; indexOf because some sites send additional information in content-type header
-          if (headRes.headers['content-type'] && headRes.headers['content-type'].indexOf('text/html') > -1) {
+          if (!error && headRes.headers['content-type'] && headRes.headers['content-type'].indexOf('text/html') > -1) {
             request(url, function (error, response, body) {
               if (!error && response.statusCode == 200) {
                 var $ = cheerio.load(body);
