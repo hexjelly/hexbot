@@ -10,6 +10,7 @@ module.exports = {
     "regex": /^!wiki?\s+(.+)/i,
     "handler": function (params) {
       var article = params.result[1];
+      var to = params.to;
       var callback = params.callback;
       var url = "https://en.wikipedia.org/w/api.php?format=json&action=opensearch&namespace=0&search=" + encodeURIComponent(article) + "&limit=1";
 
@@ -30,12 +31,12 @@ module.exports = {
                     // IRC message length limit is 512, take nick/host into account (arbitrarily atm) and shorten extract to fit together with URL
                     extract = extract.substr(0,417-url.length) + '...';
                   }
-                  callback(extract + url);
+                  callback.say(to, extract + url);
                 }
               }
             });
           } else { // no search result
-            callback('No result for "' + article + '".');
+            callback.say(to, 'No result for "' + article + '".');
           }
         }
       });

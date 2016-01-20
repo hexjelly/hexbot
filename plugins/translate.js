@@ -13,6 +13,7 @@ module.exports = {
       var APIKey = nconf.get('plugins').translate.APIKey;
       var result = params.result;
       var from = params.from;
+      var to = params.to;
       var callback = params.callback;
       // yandex API error codes
       var codes = {
@@ -33,12 +34,12 @@ module.exports = {
         if (!error && response.statusCode == 200) {
           body = JSON.parse(body);
           if (body.code == 200) {
-            callback(from + ', ' + body.text);
+            callback.say(to, from + ', ' + body.text);
           } else {
-            callback(from + ', ' + body.code + ': ' + codes[body.code]);
+            callback.say(to, from + ', ' + body.code + ': ' + codes[body.code]);
           }
         } else {
-          callback(from + ", couldn't connect to translation API. Server responded with code " + response.statusCode);
+          callback.say(to, from + ", couldn't connect to translation API. Server responded with code " + response.statusCode);
         }
       });
     }

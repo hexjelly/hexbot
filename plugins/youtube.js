@@ -12,6 +12,7 @@ module.exports = {
     "handler": function (params) {
       var APIKey = nconf.get('plugins').youtube.APIKey;
       var result = params.result;
+      var to = params.to;
       var callback = params.callback;
 
       if (result[2]) { // normal link
@@ -41,7 +42,7 @@ module.exports = {
               var durationMins = (duration[4] ? pad(duration[4],2) + ":" : "00:");
               var durationSecs = (duration[5] ? pad(duration[5],2) : "00");
 
-              callback("[YouTube] " + title + " (" + durationWeeks + durationDays + durationHours + durationMins + durationSecs + ")" + (link ? " https://www.youtube.com/watch?v=" + youtubeID : ""));
+              callback.say(to, "[YouTube] " + title + " (" + durationWeeks + durationDays + durationHours + durationMins + durationSecs + ")" + (link ? " https://www.youtube.com/watch?v=" + youtubeID : ""));
           }
         });
       }
@@ -55,7 +56,7 @@ module.exports = {
               if (youtube.items[0]) {
                 getYT(youtube.items[0].id.videoId, true, callback);
               } else {
-                callback("No search results for '" + search + "'.");
+                callback.say(to, "No search results for '" + search + "'.");
               }
           }
         });

@@ -10,6 +10,7 @@ module.exports = {
   "message": {
     "regex": /^!(?:lastfm|lfm)(?:\s+(.+))?$/i,
     "handler": function (params) {
+      var to = params.to;
       var APIKey = nconf.get('plugins').lastfm.APIKey;
       var user = (params.result[1] ? params.result[1] : params.from);
       var callback = params.callback;
@@ -20,11 +21,11 @@ module.exports = {
         if (!error && response.statusCode == 200) {
           var lastfm = JSON.parse(body);
           if (lastfm.error) {
-            callback('Error: ' + lastfm.message);
+            callback.say(to, 'Error: ' + lastfm.message);
           } else {
             if (lastfm.recenttracks.track.length > 0) {
               var np = lastfm.recenttracks.track[0].artist['#text'] + ' - ' + lastfm.recenttracks.track[0].name;
-              callback(lastfm.recenttracks['@attr'].user + (lastfm.recenttracks.track[0]['@attr'] ? ' np: ' : ' lp: ') + np);
+              callback.say(to, lastfm.recenttracks['@attr'].user + (lastfm.recenttracks.track[0]['@attr'] ? ' np: ' : ' lp: ') + np);
             }
           }
         }

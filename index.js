@@ -32,10 +32,7 @@ bot.on('registered', function (message) {
 });
 
 bot.on('message', function (from, to, text) {
-  function callback(bot, message) {
-    return this.say(to, message);
-  }
-
+  var self = this;
   for (var key in this.plugins.list) {
     var plugin = this.plugins.list[key];
     if (plugin.message) {
@@ -46,7 +43,7 @@ bot.on('message', function (from, to, text) {
           to = from;
         }
         try {
-          plugin.message.handler({ "result": result, "text": text, "to": to, "from": from, "callback": callback.bind(this) });
+          plugin.message.handler({ "result": result, "text": text, "to": to, "from": from, "callback": self });
         } catch (err) {
           util.log("Plugin '" + key + "' error: " + err);
         }

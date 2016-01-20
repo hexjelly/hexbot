@@ -10,6 +10,7 @@ module.exports = {
     "regex": /^!(?:dict|define|def|dic|wikt|wt)\s+(.*)$/i,
     "handler": function (params) {
       var word = params.result[1];
+      var to = params.to;
       var callback = params.callback;
       var url = "http://dictionaryapi.net/api/definition/" + encodeURIComponent(word);
 
@@ -26,9 +27,9 @@ module.exports = {
             if (definition.length > 420) {
               definition = definition.substr(0,417) + '...';
             }
-            callback(definition);
+            callback.say(to, definition);
           } else {
-            callback("Couldn't find definition for '" + word + "'.");
+            callback.say(to, "Couldn't find definition for '" + word + "'.");
           }
         }
       });

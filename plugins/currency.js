@@ -11,6 +11,7 @@ module.exports = {
     "handler": function (params) {
       var amount = parseFloat(params.result[1]) || 1;
       var base = params.result[2];
+      var to = params.to;
       var convert = params.result[3];
       var callback = params.callback;
       var url = "https://api.fixer.io/latest?base=" + base.toUpperCase() + "&symbols=" + convert.toUpperCase();
@@ -20,9 +21,9 @@ module.exports = {
           var currencies = JSON.parse(body);
           if (Object.keys(currencies.rates).length > 0) {
             var conversion = Math.round((amount * currencies.rates[convert.toUpperCase()]) * 100) / 100;
-            callback(amount + " " + base.toUpperCase() + " = " + conversion + " " + convert.toUpperCase());
+            callback.say(to, amount + " " + base.toUpperCase() + " = " + conversion + " " + convert.toUpperCase());
           } else {
-            callback("User error");
+            callback.say(to, "User error");
           }
         }
       });

@@ -11,6 +11,7 @@ module.exports = {
     "regex": /^!etym?\s+([^:]+)(?:\s+\:(.+))?$/i,
     "handler": function (params) {
       var word = params.result[1];
+      var to = params.to;
       var modifier = params.result[2];
       var callback = params.callback;
       var url = 'http://www.etymonline.com/index.php?allowed_in_frame=0&term=' + encodeURIComponent(word);
@@ -38,9 +39,9 @@ module.exports = {
             if (result.length > 420) {
               result = result.replace(/(?:\r\n|\r|\n)/g, '').substr(0,416-url.length) + '... ' + url;
             }
-            callback(result);
+            callback.say(to, result);
           } else {
-            callback("Couldn't find entry for '" + word + "'.");
+            callback.say(to, "Couldn't find entry for '" + word + "'.");
           }
         }
       });

@@ -11,6 +11,7 @@ module.exports = {
     "regex": /^!wr\s*0*(\d*)$/i,
     "handler": function (params) {
       var wr = params.result[1];
+      var to = params.to;
       var callback = params.callback;
       var url = 'http://www.moposite.com/records_elma_wrs.php';
       // no point parsing names of levels from the page as they won't change and we already know them
@@ -32,7 +33,7 @@ module.exports = {
             var wrTime = $('td', '.wrtable').eq(elementNumber-1).text();
             var wrHolder = $('td', '.wrtable').eq(elementNumber).text();
             result += wrTime + ' by ' + wrHolder;
-            callback(result);
+            callback.say(to, result);
           }
         });
       }

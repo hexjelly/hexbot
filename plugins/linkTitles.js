@@ -11,6 +11,7 @@ module.exports = {
     "regex": /((?:https?\:\/\/)|(?:www\.))(\S+\.\S+)/i,
     "handler": function (params) {
       var result = params.result;
+      var to = params.to;
       var callback = params.callback;
       var url = (result[1] != 'www.' ? result[1] + result[2] : 'http://' + result[2]);
       var ignoreRegex = /^(?:.+\.)?([^\/\?]+\.[^\/\?]+)(?:\/|\?)?.*?$/i;
@@ -44,7 +45,7 @@ module.exports = {
               if (!error && response.statusCode == 200) {
                 var $ = cheerio.load(body);
                 var title = $('title').text().replace(/(?:\r\n|\r|\n|\s{2,})/g, ''); // remove newlines and multiple space characters
-                if (title) callback('[Title] ' + title);
+                if (title) callback.say(to, '[Title] ' + title);
               }
             });
           } else {

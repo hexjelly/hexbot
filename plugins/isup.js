@@ -10,14 +10,15 @@ module.exports = {
     "regex": /^!isup\s+(?:https|http)?(?:\:|\/)*(.+\..+)/i,
     "handler": function (params) {
       var result = params.result;
+      var to = params.to;
       var callback = params.callback;
       var testURI = 'http://' + result[1];
 
       request(testURI, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-          callback(testURI + ' seems to be up!');
+          callback.say(to, testURI + ' seems to be up!');
         } else {
-          callback(testURI + ' is down for me as well');
+          callback.say(to, testURI + ' is down for me as well');
         }
       });
     }
