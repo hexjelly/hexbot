@@ -7,7 +7,7 @@
     "debug": false,
     "showErrors": false,
     "autoRejoin": true,
-    "autoConnect": true,
+    "autoConnect": false,
     "channels": ["#hextest"],
     "secure": false,
     "selfSigned": false,
