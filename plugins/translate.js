@@ -1,3 +1,4 @@
+/* jshint node: true */
 /* Translation using Yandex API */
 
 'use strict';
@@ -23,7 +24,7 @@ module.exports = {
         "413": "Exceeded the maximum text size",
         "422": "The text cannot be translated",
         "501": "The specified translation direction is not supported"
-      }
+      };
       var language = (result[1] && !result[2] ? result[1] : (result[2] ? result[1] + '-' + result[2] : 'en'));
       var translateText = result[3];
       var url = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + APIKey + "&text=" + encodeURIComponent(translateText) + "&lang=" + language + "&options=1";
@@ -42,4 +43,4 @@ module.exports = {
       });
     }
   }
-}
+};

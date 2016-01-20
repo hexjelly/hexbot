@@ -1,11 +1,12 @@
+/* jshint node: true */
 'use strict';
 
 // core requires, initialization, connect
-var irc = require('irc'),
-  nconf = require('nconf'),
-  util = require('util'),
-  walk = require('walk'),
-  bot;
+var irc = require('irc');
+var nconf = require('nconf');
+var util = require('util');
+var walk = require('walk');
+var bot;
 
 function getConfigFile() {
   var overrideConfig = './config/config.user.json',
@@ -31,7 +32,7 @@ bot.on('registered', function (message) {
 });
 
 bot.on('message', function (from, to, text) {
-  function callback(message) {
+  function callback(bot, message) {
     return this.say(to, message);
   }
 

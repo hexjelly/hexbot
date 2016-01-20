@@ -1,3 +1,4 @@
+/* jshint node: true */
 /* Get etymology information */
 
 'use strict';
@@ -12,7 +13,6 @@ module.exports = {
       var word = params.result[1];
       var modifier = params.result[2];
       var callback = params.callback;
-
       var url = 'http://www.etymonline.com/index.php?allowed_in_frame=0&term=' + encodeURIComponent(word);
 
       request(url, function (error, response, body) {
@@ -46,4 +46,4 @@ module.exports = {
       });
     }
   }
-}
+};

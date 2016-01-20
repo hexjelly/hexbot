@@ -1,3 +1,4 @@
+/* jshint node: true */
 /* Calculator evalution */
 
 'use strict';
@@ -20,4 +21,4 @@ module.exports = {
       }
     }
   }
-}
+};

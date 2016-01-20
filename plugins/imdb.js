@@ -1,3 +1,4 @@
+/* jshint node: true */
 /* Retrieve IMDB title, year and rating */
 
 'use strict';
@@ -25,7 +26,7 @@ module.exports = {
             var $ = cheerio.load(body);
             var result = titleregex.exec($('title').text());
             var name = result[1] || 'Unknown';
-            var year = result[2] || '(????)'
+            var year = result[2] || '(????)';
             var rating = $('span[itemprop=ratingValue]').text() || '?';
             callback("[IMDb] " + name + " " + year + " - " + rating + "/10" + (link ? " http://www.imdb.com/title/tt" + tt + "/" : ""));
           }
@@ -42,11 +43,11 @@ module.exports = {
             if (searchResult) {
               getIMDb(searchResult[1], true, callback);
             } else {
-              callback("No search results for '" + search + "'.")
+              callback("No search results for '" + search + "'.");
             }
           }
         });
       }
     }
   }
-}
+};

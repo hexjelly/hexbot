@@ -1,3 +1,4 @@
+/* jshint node: true */
 /* weather plugin, duh */
 
 'use strict';
@@ -26,4 +27,4 @@ module.exports = {
       });
     }
   }
-}
+};

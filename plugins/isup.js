@@ -1,3 +1,4 @@
+/* jshint node: true */
 /* Check if website is up */
 
 'use strict';
@@ -21,4 +22,4 @@ module.exports = {
       });
     }
   }
-}
+};

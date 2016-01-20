@@ -1,3 +1,4 @@
+/* jshint node: true */
 /* Get title of pages linked in channel */
 
 'use strict';
@@ -53,4 +54,4 @@ module.exports = {
       }
     }
   }
-}
+};

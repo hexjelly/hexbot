@@ -1,3 +1,4 @@
+/* jshint node: true */
 /* Retrieve Youtube title and duration, passively or by search */
 
 'use strict';
@@ -54,11 +55,11 @@ module.exports = {
               if (youtube.items[0]) {
                 getYT(youtube.items[0].id.videoId, true, callback);
               } else {
-                callback("No search results for '" + search + "'.")
+                callback("No search results for '" + search + "'.");
               }
           }
         });
       }
     }
   }
-}
+};

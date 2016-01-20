@@ -1,3 +1,4 @@
+/* jshint node: true */
 /* Get Last.fm recently played track */
 
 'use strict';
@@ -30,4 +31,4 @@ module.exports = {
       });
     }
   }
-}
+};
