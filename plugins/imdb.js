@@ -5,6 +5,7 @@
 
 var request = require('request');
 var cheerio = require('cheerio');
+var util = require('util');
 
 module.exports = {
   "message": {
@@ -30,6 +31,8 @@ module.exports = {
             var year = result[2] || '(????)';
             var rating = $('span[itemprop=ratingValue]').text() || '?';
             callback.say(to, "[IMDb] " + name + " " + year + " - " + rating + "/10" + (link ? " http://www.imdb.com/title/tt" + tt + "/" : ""));
+          } else if (error) {
+            util.log(error);
           }
         });
       }
@@ -46,6 +49,8 @@ module.exports = {
             } else {
               callback.say(to, "No search results for '" + search + "'.");
             }
+          } else if (error) {
+            util.log(error);
           }
         });
       }

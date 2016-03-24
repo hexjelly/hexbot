@@ -4,6 +4,7 @@
 'use strict';
 
 var request = require('request');
+var util = require('util');
 
 module.exports = {
   "message": {
@@ -31,6 +32,8 @@ module.exports = {
           } else {
             callback.say(to, "Couldn't find definition for '" + word + "'.");
           }
+        } else if (error) {
+          util.log(error);
         }
       });
     }

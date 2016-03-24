@@ -5,6 +5,7 @@
 
 var request = require('request');
 var cheerio = require('cheerio');
+var util = require('util');
 
 module.exports = {
   "message": {
@@ -34,6 +35,8 @@ module.exports = {
             var wrHolder = $('td', '.wrtable').eq(elementNumber).text();
             result += wrTime + ' by ' + wrHolder;
             callback.say(to, result);
+          } else if (error) {
+            util.log(error);
           }
         });
       }

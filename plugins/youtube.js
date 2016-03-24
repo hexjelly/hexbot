@@ -5,6 +5,7 @@
 
 var request = require('request');
 var nconf = require('nconf');
+var util = require('util');
 
 module.exports = {
   "message": {
@@ -43,7 +44,10 @@ module.exports = {
               var durationSecs = (duration[5] ? pad(duration[5],2) : "00");
 
               callback.say(to, "[YouTube] " + title + " (" + durationWeeks + durationDays + durationHours + durationMins + durationSecs + ")" + (link ? " https://www.youtube.com/watch?v=" + youtubeID : ""));
+          } else if (error) {
+            util.log(error);
           }
+
         });
       }
 
@@ -58,6 +62,8 @@ module.exports = {
               } else {
                 callback.say(to, "No search results for '" + search + "'.");
               }
+          } else if (error) {
+            util.log(error);
           }
         });
       }

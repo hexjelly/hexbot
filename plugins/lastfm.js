@@ -5,6 +5,7 @@
 
 var nconf = require('nconf');
 var request = require('request');
+var util = require('util');
 
 module.exports = {
   "message": {
@@ -28,6 +29,8 @@ module.exports = {
               callback.say(to, lastfm.recenttracks['@attr'].user + (lastfm.recenttracks.track[0]['@attr'] ? ' np: ' : ' lp: ') + np);
             }
           }
+        } else if (error) {
+          util.log(error);
         }
       });
     }

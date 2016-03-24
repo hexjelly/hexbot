@@ -5,6 +5,7 @@
 
 var request = require('request');
 var cheerio = require('cheerio');
+var util = require('util');
 
 module.exports = {
   "message": {
@@ -43,6 +44,8 @@ module.exports = {
           } else {
             callback.say(to, "Couldn't find entry for '" + word + "'.");
           }
+        } else if (error) {
+          util.log(error);
         }
       });
     }

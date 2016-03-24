@@ -4,6 +4,7 @@
 'use strict';
 
 var request = require('request');
+var util = require('util');
 
 module.exports = {
   "message": {
@@ -24,6 +25,8 @@ module.exports = {
           } else {
             callback.say(to, 'Location not found.');
           }
+        } else if (error) {
+          util.log(error);
         }
       });
     }
