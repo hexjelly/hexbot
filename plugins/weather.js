@@ -24,7 +24,7 @@ module.exports = {
             callback.say(to, weather.message);
           } else { // no error, yay probably
             let location = weather.name + ', ' + weather.sys.country;
-            let temp = weather.main.temp;
+            let temp = Math.round(weather.main.temp);
             let description = weather.weather[0].description.charAt(0).toUpperCase() + weather.weather[0].description.slice(1);
             let humidity = weather.main.humidity;
             let wind = weather.wind.speed;
