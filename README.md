@@ -15,11 +15,12 @@ Plugin  | Node modules
 calc.js  | mathjs
 currency.js | request
 dictionary.js | request
-elma_wrs.js  | request, cheerio
+elmaWRs.js  | request, cheerio
 etym.js | request, cheerio
 imdb.js | request, cheerio
 isup.js  | request
 lastfm.js | request
+linktitles.js | request
 translate.js  | request
 weather.js  | request
 wikipedia.js | request
@@ -69,6 +70,11 @@ Really basic function utilizing the request module and just checking for a 200 r
 
 Shows the currently playing track of user (defaults to nick if nothing specified), or if no currently playing track; the last one played. Requires API key.
 
+## linkTitles.js
+**Passive listener**
+
+Fetches titles of links if they are HTML. Currently hard-coded to ignore sites used by other plugins.
+
 ## translate.js
 **!tr [:en] [:jp] translation text**
 
@@ -76,9 +82,9 @@ Uses the [Yandex](https://www.yandex.com/) translation API. If only supplied one
 Important to note that you need to add your own API key for this plugin. You can set this in the config file. Make sure **not** to put it in the default config file if you plan to fork the repo.
 
 ## weather.js
-**!weather city|country**
+**!weather city**
 
-Uses the [Yahoo weather API](https://weather.yahoo.com/). No API key needed.
+Uses the [Open Weather Map API](https://openweathermap.org/). API key needed.
 
 ## wikipedia.js
 **!wik[i] search**
