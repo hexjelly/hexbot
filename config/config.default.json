@@ -37,6 +37,9 @@
     },
     "lastfm": {
       "APIKey": ""
+    },
+    "weather": {
+      "APIKey": ""
     }
   }
 }
