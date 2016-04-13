@@ -27,8 +27,8 @@ module.exports = {
             let temp = Math.round(weather.main.temp);
             let description = weather.weather[0].description.charAt(0).toUpperCase() + weather.weather[0].description.slice(1);
             let humidity = weather.main.humidity;
-            let wind = weather.wind.speed;
-            let result = location + ': ' + temp + '°C ' + description + ', ' + humidity + '% humidity, ' + wind + 'm/s winds';
+            let wind = Math.round(weather.wind.speed);
+            let result = location + ': ' + temp + '°C ' + description + ', ' + humidity + '% humidity, ' + wind + ' m/s winds';
             callback.say(to, result);
           }
         } else {
