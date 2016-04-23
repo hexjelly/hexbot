@@ -18,7 +18,7 @@ module.exports = {
       request(url, function (error, response, body) {
         if (!error && response.statusCode == 200) {
           var wiki = JSON.parse(body);
-          if (wiki[1][0] !== null) { // there's a match for our search term
+          if (wiki[1].length > 0) { // there's a match for our search term
             var url = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exsentences=1&exintro=&explaintext=&exsectionformat=plain&titles=" + wiki[1] + "&redirects=";
             request(url, function (error, response, body) {
               if (!error && response.statusCode == 200) {
