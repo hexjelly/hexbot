@@ -3,28 +3,34 @@
 
 'use strict';
 
+const nconf = require('nconf');
 const request = require('request');
 const util = require('util');
 
 module.exports = {
   "message": {
     "regex": /^!(?:dict|define|def|dic|wikt|wt)\s+(.*)$/i,
-    "handler": function (params) {
+    "handler": function dict(params) {
       let word = params.result[1];
       let to = params.to;
       let callback = params.callback;
-      let url = "http://dictionaryapi.net/api/definition/" + encodeURIComponent(word);
+
+      let APIKey = nconf.get('plugins').dictionary.APIKey;
+      let url = "http://api.wordnik.com:80/v4/word.json/" + encodeURIComponent(word) + "/definitions?limit=3&includeRelated=false&sourceDictionaries=wiktionary%2Cwebster&useCanonical=true&includeTags=false&api_key=" + APIKey;
 
       request(url, (error, response, body) => {
         if (!error && response.statusCode === 200) {
-          let dict = JSON.parse(body);
-          let definition = '';
-          if (dict.length > 0 && dict[0].Definitions.length > 0) {
-            definition += dict[0].Word + ' (' + dict[0].PartOfSpeech + '): ';
-            for (var i = 1; i < dict[0].Definitions.length + 1 && i < 5; i++) {
-              definition += (i > 1 ? ', ' : '') + (dict[0].Definitions.length > 1 ? i + '. ' : '') + dict[0].Definitions[i-1];
-            }
+          let definition;
+          body = JSON.parse(body);
 
+          if (body.length > 0) {
+            definition = body[0].word + ' - ';
+            for (let n = 1; n < body.length + 1; n++) {
+              definition += n + ": " + body[n-1].text + ' ';
+            }
+          }
+
+          if (definition) {
             if (definition.length > 420) {
               definition = definition.substr(0,417) + '...';
             }

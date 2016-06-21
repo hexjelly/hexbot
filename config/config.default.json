@@ -40,6 +40,9 @@
     },
     "weather": {
       "APIKey": ""
+    },
+    "dictionary": {
+      "APIKey": ""
     }
   }
 }
