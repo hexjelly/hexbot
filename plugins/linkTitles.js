@@ -19,7 +19,7 @@ function title (params) {
   let host = ignoreRegex.exec(result[2]);
 
   if (ignore.indexOf(host[1].toLowerCase()) === -1) {
-    request({ url: url, method: "HEAD" }, (error, headRes) => {
+    request({ url: url, method: "HEAD", headers: { 'User-Agent': 'request' } }, (error, headRes) => {
 
       // TODO: might be wise to limit a request attempt's size even if checking for content-type first?
       /* var maxSize = 10485760;
@@ -40,7 +40,7 @@ function title (params) {
 
       // only check for title of html files; indexOf because some sites send additional information in content-type header
       if (!error && headRes.headers['content-type'] && headRes.headers['content-type'].indexOf('text/html') > -1) {
-        request(url, (error, response, body) => {
+        request({ url: url, headers: { 'User-Agent': 'request' } }, (error, response, body) => {
           if (!error && response.statusCode == 200) {
             let $ = cheerio.load(body);
             let title = $('title', 'head').text().replace(/(?:\r\n|\r|\n|\s{2,})/g, ''); // remove newlines and multiple space characters
