@@ -29,7 +29,7 @@
     "walk": "^2.3.9"
   },
   "devDependencies": {
-    "eslint": "^3.12.2",
+    "eslint": "^3.14.0",
     "mocha": "^3.2.0"
   }
 }
