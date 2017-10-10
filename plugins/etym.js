@@ -1,53 +1,58 @@
-/* jshint node: true */
-/* Get etymology information */
+const request = require('request');
+const cheerio = require('cheerio');
+const util = require('util');
 
-'use strict';
+function parseAndSearch(body, word, modifier) {
+	let term;
+	let definition;
+	const $ = cheerio.load(body);
+	if (modifier) {
+		const search = `${word.toLowerCase()} (${modifier.toLowerCase()})`;
+		// find element that matches word + modifier
+		const specificElement = $('.word--C9UPa > div > h1').filter((i, el) => {
+			return $(el).text() === search;
+		}).eq(0);
+		term = $(specificElement).text();
+		definition = $(specificElement).siblings().eq(0).text();
+	} else {
+		const firstElement = $('.word--C9UPa > div > h1').eq(0);
+		term = $(firstElement).text();
+		definition = $(firstElement).siblings().eq(0).text();
+	}
 
-var request = require('request');
-var cheerio = require('cheerio');
-var util = require('util');
+	if (term && definition) {
+		return `${term}: ${definition}`;
+	} else {
+		return null;
+	}
+}
+
+function etyHandler(params) {
+	const word = params.result[1];
+	const to = params.to;
+	const modifier = params.result[2];
+	const callback = params.callback;
+	const url = `http://www.etymonline.com/word/${encodeURIComponent(word)}`;
+
+	request(url, (error, response, body) => {
+		if (!error && response.statusCode === 200) {
+			let result = parseAndSearch(body, word, modifier);
+            if (!result) return console.log('nope');
+			else if (result && result.length > 420) {
+				result = result.replace(/(?:\r\n|\r|\n)/g, '').substr(0, 416 - url.length) + '... ' + url;
+			}
+			callback.say(to, result);
+		} else if (response.statusCode === 404) {
+            callback.say(to, `No results for '${word}'`);
+        } else if (error) {
+			util.log(error);
+		}
+	});
+}
 
 module.exports = {
   "message": {
     "regex": /^!etym?\s+([^:]+)(?:\s+\:(.+))?$/i,
-    "handler": function (params) {
-      var word = params.result[1];
-      var to = params.to;
-      var modifier = params.result[2];
-      var callback = params.callback;
-      var url = 'http://www.etymonline.com/index.php?allowed_in_frame=0&term=' + encodeURIComponent(word);
-
-      request(url, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-          var term;
-          var definition;
-          var $ = cheerio.load(body);
-          if (modifier) {
-            var search = word + modifier;
-            $('dt').each(function (i, elem) {
-              if ($(this).text().replace(/\W/g, '').toLowerCase() == search.replace(/\W/g, '').toLowerCase()) {
-                  term = $(this).children('a').eq(0).text();
-                  definition = $(this).next().text();
-              }
-            });
-          } else {
-            term = $('dt').eq(0).children('a').eq(0).text();
-            definition = $('dd').eq(0).text();
-          }
-
-          if (term && definition) {
-            var result = term + ': ' + definition;
-            if (result.length > 420) {
-              result = result.replace(/(?:\r\n|\r|\n)/g, '').substr(0,416-url.length) + '... ' + url;
-            }
-            callback.say(to, result);
-          } else {
-            callback.say(to, "Couldn't find entry for '" + word + "'.");
-          }
-        } else if (error) {
-          util.log(error);
-        }
-      });
-    }
+    "handler": etyHandler
   }
 };
