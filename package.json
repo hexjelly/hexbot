@@ -1,36 +1,35 @@
 {
-  "name": "hexbot",
-  "version": "0.1.0",
-  "description": "A poor nodejs IRC bot",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hexjelly/hexbot.git"
-  },
-  "keywords": [
-    "irc"
-  ],
-  "author": "Hexjelly",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/hexjelly/hexbot/issues"
-  },
-  "homepage": "https://github.com/hexjelly/hexbot#readme",
-  "dependencies": {
-    "cheerio": "^1.0.0-rc.1",
-    "google-translate-api": "^2.3.0",
-	"irc": "^0.5.2",
-    "irc-colors": "^1.3.2",
-    "mathjs": "^3.16.3",
-    "nconf": "^0.8.2",
-    "request": "^2.81.0",
-    "walk": "^2.3.9"
-  },
-  "devDependencies": {
-    "eslint": "^4.1.0",
-    "mocha": "^3.5.2"
-  }
+	"name": "hexbot",
+	"version": "0.2.0",
+	"description": "A poor NodeJS IRC bot",
+	"main": "src/index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hexjelly/hexbot.git"
+	},
+	"keywords": [
+		"irc"
+	],
+	"author": "Roger Andersen <hexjelly@hexjelly.com>",
+	"license": "Apache-2.0",
+	"bugs": {
+		"url": "https://github.com/hexjelly/hexbot/issues"
+	},
+	"homepage": "https://github.com/hexjelly/hexbot#readme",
+	"dependencies": {
+		"cheerio": "^1.0.0-rc.2",
+		"express": "^4.16.2",
+		"got": "^7.1.0",
+		"irc-framework": "^2.9.1",
+		"nconf": "^0.8.5"
+	},
+	"devDependencies": {
+		"ava": "^0.22.0",
+		"coveralls": "^3.0.0",
+		"nyc": "^11.2.1",
+		"xo": "^0.18.2"
+	}
 }
