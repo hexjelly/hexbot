@@ -9,13 +9,13 @@ function parseAndSearch(body, word, modifier) {
 	if (modifier) {
 		const search = `${word.toLowerCase()} (${modifier.toLowerCase()})`;
 		// find element that matches word + modifier
-		const specificElement = $('.word--C9UPa > div > h1').filter((i, el) => {
+		const specificElement = $('.word--C9UPa .word__name--TTbAA').filter((i, el) => {
 			return $(el).text() === search;
 		}).eq(0);
 		term = $(specificElement).text();
 		definition = $(specificElement).siblings().eq(0).text();
 	} else {
-		const firstElement = $('.word--C9UPa > div > h1').eq(0);
+		const firstElement = $('.word--C9UPa .word__name--TTbAA').eq(0);
 		term = $(firstElement).text();
 		definition = $(firstElement).siblings().eq(0).text();
 	}
