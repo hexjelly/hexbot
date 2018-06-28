@@ -8,6 +8,10 @@ var util = require('util');
 var walk = require('walk');
 var bot;
 
+process.on('uncaughtException', err => {
+  console.log(err);
+});
+
 function getConfigFile() {
   var overrideConfig = './config/config.user.json',
     defaultConfig = './config/config.default.json';
