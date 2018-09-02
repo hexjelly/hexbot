@@ -24,7 +24,7 @@ function getIMDb(tt, link, to, callback) {
       const result = titleregex.exec($('title').text());
       const name = result[1] || 'Unknown';
       const year = result[2] || '(????)';
-      const rating = $('span[itemprop=ratingValue]').text() || '?';
+      const rating = $('div.ratingValue strong').text() || '?';
       callback.say(to, "[IMDb] " + name + " " + year + " - " + rating + "/10" + (link ? " http://www.imdb.com/title/tt" + tt + "/" : ""));
     } else if (error) {
       util.log(error);
