@@ -1,8 +1,9 @@
 /* Retrieve IMDB title, year and rating */
 
 const request = require('request');
-const cheerio = require('cheerio');
 const util = require('util');
+const nconf = require('nconf');
+const APIKey = nconf.get('plugins').omdb.APIKey;
 
 function handler(params) {
   const callback = params.callback;
@@ -10,22 +11,29 @@ function handler(params) {
   if (params.result[1]) {
     searchIMDb(params.result[1], to, callback);
   } else if (params.result[2]) {
-    getIMDb(params.result[2], false, to, callback);
+    getIMDb(params.result[2], to, callback);
   }
 }
 
-function getIMDb(tt, link, to, callback) {
-  const url = 'http://akas.imdb.com/title/tt' + tt;
-  const titleregex = /^(.*)\s(\(.*\))\s-\sIMDb.*$/;
+function parseResponse(json, link) {
+  if (json.Response === "False") return "No IMDb information found";
+
+  const title = json.Title || "?";
+  const year = json.Year || "????";
+  const rating = json.Ratings && json.Ratings[0] && json.Ratings[0].Value || "?/10";
+  const tt = json.imdbID || "?";
+
+  return "[IMDb] " + title + " " + year + " - " + rating + (link ? " http://www.imdb.com/title/" + tt + "/" : "");
+}
+
+function getIMDb(tt, to, callback) {
+  const url = "http://www.omdbapi.com/?i=tt" + encodeURIComponent(tt) + "&apikey=" + APIKey;
 
   request(url, (error, response, body) => {
     if (!error && response.statusCode == 200) {
-      const $ = cheerio.load(body);
-      const result = titleregex.exec($('title').text());
-      const name = result[1] || 'Unknown';
-      const year = result[2] || '(????)';
-      const rating = $('div.ratingValue strong').text() || '?';
-      callback.say(to, "[IMDb] " + name + " " + year + " - " + rating + "/10" + (link ? " http://www.imdb.com/title/tt" + tt + "/" : ""));
+      let info = JSON.parse(body);
+
+      callback.say(to, parseResponse(info, false));
     } else if (error) {
       util.log(error);
     }
@@ -33,17 +41,13 @@ function getIMDb(tt, link, to, callback) {
 }
 
 function searchIMDb(search, to, callback) {
-  const url = "http://www.imdb.com/find?q=" + encodeURIComponent(search) + "&s=tt";
+  const url = "http://www.omdbapi.com/?t=" + encodeURIComponent(search) + "&apikey=" + APIKey;
 
   request(url, (error, response, body) => {
     if (!error && response.statusCode == 200) {
-      const $ = cheerio.load(body);
-      const searchResult = /tt(\d{7})/.exec($('td.result_text a').attr('href'));
-      if (searchResult) {
-        getIMDb(searchResult[1], true, to, callback);
-      } else {
-        callback.say(to, "No search results for '" + search + "'.");
-      }
+      let info = JSON.parse(body);
+
+      callback.say(to, parseResponse(info, true));
     } else if (error) {
       util.log(error);
     }

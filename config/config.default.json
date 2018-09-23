@@ -8,7 +8,9 @@
     "showErrors": false,
     "autoRejoin": true,
     "autoConnect": false,
-    "channels": ["#hextest"],
+    "channels": [
+      "#hextest"
+    ],
     "secure": false,
     "selfSigned": false,
     "certExpired": false,
@@ -27,7 +29,9 @@
     "adminPassword": "admin"
   },
   "commandPrefix": "!",
-  "ignoredPlugins": ["bear"],
+  "ignoredPlugins": [
+    "bear"
+  ],
   "plugins": {
     "translate": {
       "APIKey": ""
@@ -42,6 +46,9 @@
       "APIKey": ""
     },
     "dictionary": {
+      "APIKey": ""
+    },
+    "omdb": {
       "APIKey": ""
     }
   }
