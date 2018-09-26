@@ -1,35 +1,42 @@
 {
-	"name": "hexbot",
-	"version": "0.2.0",
-	"description": "A poor NodeJS IRC bot",
-	"main": "src/index.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/hexjelly/hexbot.git"
-	},
-	"keywords": [
-		"irc"
-	],
-	"author": "Roger Andersen <hexjelly@hexjelly.com>",
-	"license": "Apache-2.0",
-	"bugs": {
-		"url": "https://github.com/hexjelly/hexbot/issues"
-	},
-	"homepage": "https://github.com/hexjelly/hexbot#readme",
-	"dependencies": {
-		"cheerio": "^1.0.0-rc.2",
-		"express": "^4.16.2",
-		"got": "^7.1.0",
-		"irc-framework": "^2.9.1",
-		"nconf": "^0.8.5"
-	},
-	"devDependencies": {
-		"ava": "^0.22.0",
-		"coveralls": "^3.0.0",
-		"nyc": "^11.2.1",
-		"xo": "^0.18.2"
-	}
+  "name": "hexbot",
+  "version": "2.0.0",
+  "description": "Personal IRC bot",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node -r dotenv/config dist/index.js",
+    "test": "jest",
+    "build": "tsc",
+    "coverage": "npm run test -- --coverage && cat ./coverage/lcov.info | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hexjelly/hexbot.git"
+  },
+  "author": "Roger Andersen",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/hexjelly/hexbot/issues"
+  },
+  "homepage": "https://github.com/hexjelly/hexbot#readme",
+  "dependencies": {
+    "@types/better-sqlite3": "^3.1.3",
+    "@types/dotenv": "^4.0.3",
+    "@types/needle": "^2.0.2",
+    "better-sqlite3": "^4.1.4",
+    "chalk": "^2.4.1",
+    "dotenv": "^6.0.0",
+    "irc-framework": "^3.1.0",
+    "log-timestamp": "^0.2.1",
+    "needle": "^2.2.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.2",
+    "@types/nock": "^9.3.0",
+    "coveralls": "^3.0.2",
+    "jest": "^23.6.0",
+    "nock": "^10.0.0",
+    "ts-jest": "^23.10.1",
+    "typescript": "^3.0.3"
+  }
 }

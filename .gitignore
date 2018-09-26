@@ -1,4 +1,5 @@
 node_modules
+coverage
+dist
 
-# User overridden config
-config/user.json
+.env
