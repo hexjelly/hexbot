@@ -1,36 +1,44 @@
 {
   "name": "hexbot",
-  "version": "0.1.0",
-  "description": "A poor nodejs IRC bot",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "Personal IRC bot",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node -r dotenv/config dist/index.js",
+    "test": "jest",
+    "build": "tsc",
+    "coverage": "npm run test -- --coverage && cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hexjelly/hexbot.git"
   },
-  "keywords": [
-    "irc"
-  ],
-  "author": "Hexjelly",
-  "license": "MIT",
+  "author": "Roger Andersen",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/hexjelly/hexbot/issues"
   },
   "homepage": "https://github.com/hexjelly/hexbot#readme",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.1",
-    "google-translate-api": "^2.3.0",
-	"irc": "^0.5.2",
-    "irc-colors": "^1.3.2",
-    "mathjs": "^3.16.3",
-    "nconf": "^0.8.2",
-    "request": "^2.81.0",
-    "walk": "^2.3.9"
+    "@types/dotenv": "^4.0.3",
+    "@types/needle": "^2.0.2",
+    "@types/sequelize": "^4.27.26",
+    "@types/sqlite3": "^3.1.3",
+    "chalk": "^2.4.1",
+    "dotenv": "^6.0.0",
+    "irc-framework": "^3.1.0",
+    "log-timestamp": "^0.2.1",
+    "needle": "^2.2.4",
+    "sequelize": "^4.39.0",
+    "sqlite3": "^4.0.2"
   },
   "devDependencies": {
-    "eslint": "^4.1.0",
-    "mocha": "^3.5.2"
+    "@types/jest": "^23.3.2",
+    "@types/nock": "^9.3.0",
+    "coveralls": "^3.0.2",
+    "jest": "^23.6.0",
+    "nock": "^10.0.0",
+    "ts-jest": "^23.10.1",
+    "typescript": "^3.0.3"
   }
 }
