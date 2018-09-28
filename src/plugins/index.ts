@@ -1,2 +1,2 @@
-export { Log } from './log';
+export { Logging } from './logging';
 export { IMDb } from './imdb';

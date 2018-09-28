@@ -3,7 +3,7 @@ import Chalk from 'chalk';
 
 /** Formats OMDB API responses, and optionally adds link to the title searched for */
 export function formatResponse(json, showLink?) {
-	if (json.Response === "False") return "No IMDb information found";
+	if (json.Response != "True") return "No IMDb information found";
 
 	const title = json.Title || "?";
 	const year = json.Year || "????";
@@ -36,21 +36,21 @@ function IMDbHandler(command, event, client, next) {
 	}
 
 	if (command === "privmsg" && event.nick != client.user.nick) {
-		const pattern = /^!imdb\s(?<search>.+)|.*imdb\.com\/title\/tt(?<tt>\d{7}).*/i;
+		const pattern = /^!imdb\s(.+)|.*imdb\.com\/title\/tt(\d{7}).*/i;
 		const result = pattern.exec(event.message);
 
+		if (!result) return next();
+
 		let msg;
-		if (result && result.groups) {
-			// matches !imdb command for searching for a title
-			if (result.groups.search) {
-				msg = searchIMDb(result.groups.search);
-			} else if (result.groups.tt) { // matches a imdb link for a known title
-				msg = getIMDb(result.groups.tt);
-			}
+		// matches !imdb command for searching for a title
+		if (result[1]) {
+			msg = searchIMDb(result[1]);
+		} else if (result[2]) { // matches a imdb link for a known title
+			msg = getIMDb(result[2]);
 		}
 
 		msg.then(msg => client.say(event.target, msg))
-			.catch(error => console.error(error));
+			.catch(error => console.error(Chalk.red(error)));
 	}
 
 	next();

@@ -14,6 +14,12 @@ Bot.connect({
 	auto_reconnect_max_retries: 1000
 });
 
-Bot.on('debug', function (event) {
-	console.log(event);
-});
+Bot.on('registered', () => {
+	const channels = process.env.CHANNELS ? process.env.CHANNELS.split(',') : [];
+	channels.forEach(channel => {
+		Bot.join('#' + channel);
+	});
+})
+// Bot.on('debug', function (event) {
+// 	console.log(event);
+// });
