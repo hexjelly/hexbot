@@ -12,6 +12,7 @@ function LoggingHandler(command, event, client, next) {
 		client.db.models.logs.create({
 			event: 'message',
 			nick: event.nick,
+			network: client.network.name,
 			ident: event.ident,
 			host: event.hostname,
 			target: isChannel ? null : event.target,
@@ -37,6 +38,7 @@ function LogInject(client) {
 		client.db.models.logs.create({
 			event: 'message',
 			nick: client.user.nick,
+			network: client.network.name,
 			ident: client.user.username,
 			host: client.user.host,
 			target: isChannel ? null : dest,
