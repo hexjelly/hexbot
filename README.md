@@ -10,7 +10,9 @@ A personal IRC bot written in TypeScript. Uses the [irc-framework](https://githu
 SERVER=localhost
 PORT=6667
 NICK=hexbot
-DB_FILE=bot.db
+CHANNELS=hextest,hextest2
+DB_FILE_PROD=bot.db
+DB_FILE_TEST=test.db
 OMDB_APIKEY=
 ```
 
