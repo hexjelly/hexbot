@@ -1,5 +1,5 @@
 import Nock from 'nock';
-import { formatResponse, searchIMDb, getIMDb } from '.';
+import { formatResponse, searchIMDb, getIMDb } from './IMDb';
 
 describe("IMDb plugin", () => {
 	test("formats response correctly", () => {
