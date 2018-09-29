@@ -51,6 +51,11 @@ function IMDbHandler(command, event, client, next) {
 
 		msg.then(msg => client.say(event.target, msg))
 			.catch(error => console.error(Chalk.red(error)));
+
+		// unclear whether to call next or not until we figure out flow of plugin behavior.
+		// for now let's assume any "important" plugins like Logging will be declared and
+		// processed before this, and just skip next middleware(s) like LinkTitle etc.
+		return;
 	}
 
 	next();
