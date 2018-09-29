@@ -17,7 +17,7 @@ class Client extends IrcClient {
 			dialect: 'sqlite',
 			storage: db_file || 'unknown.db',
 			operatorsAliases: false,
-			logging: process.env.NODE_ENV != "production"
+			logging: process.env.NODE_ENV != "production" ? console.log : false
 		});
 	}
 }
