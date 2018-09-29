@@ -19,7 +19,8 @@ Bot.on('registered', () => {
 	channels.forEach(channel => {
 		Bot.join('#' + channel);
 	});
-})
+});
+
 // Bot.on('debug', function (event) {
 // 	console.log(event);
 // });
