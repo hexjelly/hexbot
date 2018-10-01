@@ -11,8 +11,8 @@ bot.connection.connected = true;
 bot.connection.registered = true;
 
 // irc-framework's default max msg length is extremely conservative
-// let's up it to 510 minus a VERY generous command + channel/target length
-bot.options.message_max_length = 510 - 35;
+// let's up it to 510 minus a pretty generous command + channel/target length
+bot.options.message_max_length = 510 - 100;
 
 bot.on('registered', () => {
 	const channels = process.env.CHANNELS ? process.env.CHANNELS.split(',') : [];
