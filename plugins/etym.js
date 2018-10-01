@@ -13,11 +13,11 @@ function parseAndSearch(body, word, modifier) {
 			return $(el).text() === search;
 		}).eq(0);
 		term = $(specificElement).text();
-		definition = $(specificElement).siblings().eq(0).text();
+		definition = $(specificElement).siblings('.word__defination--2q7ZH').eq(0).text();
 	} else {
 		const firstElement = $('.word--C9UPa .word__name--TTbAA').eq(0);
 		term = $(firstElement).text();
-		definition = $(firstElement).siblings().eq(0).text();
+		definition = $(firstElement).siblings('.word__defination--2q7ZH').eq(0).text();
 	}
 
 	if (term && definition) {
@@ -32,7 +32,7 @@ function etyHandler(params) {
 	const to = params.to;
 	const modifier = params.result[2];
 	const callback = params.callback;
-	const url = `http://www.etymonline.com/word/${encodeURIComponent(word)}`;
+	const url = `https://www.etymonline.com/word/${encodeURIComponent(word)}`;
 
 	request(url, (error, response, body) => {
 		if (!error && response.statusCode === 200) {
