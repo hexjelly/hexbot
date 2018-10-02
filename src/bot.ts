@@ -1,7 +1,7 @@
 import 'log-timestamp'; // adds datetimestamp to any console.* calls
 import Client from './client';
 
-import { IMDb, Logging, LinkTitle, Currency } from './plugins';
+import { IMDb, Logging, LinkTitle, Currency, Etymology } from './plugins';
 
 const bot: any = new Client(); // no typings for irc-framework class :(
 
@@ -9,10 +9,6 @@ const bot: any = new Client(); // no typings for irc-framework class :(
 // the first attempt when running it will make the process quit
 bot.connection.connected = true;
 bot.connection.registered = true;
-
-// irc-framework's default max msg length is extremely conservative
-// let's up it to 510 minus a pretty generous command + channel/target length
-bot.options.message_max_length = 510 - 100;
 
 bot.on('registered', () => {
 	const channels = process.env.CHANNELS ? process.env.CHANNELS.split(',') : [];
@@ -27,6 +23,7 @@ bot.on('registered', () => {
 bot.use(Logging());
 bot.use(IMDb());
 bot.use(Currency());
+bot.use(Etymology());
 bot.use(LinkTitle());
 
 export default bot;
