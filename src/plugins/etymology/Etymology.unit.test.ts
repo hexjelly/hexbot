@@ -37,6 +37,15 @@ describe("Etymology plugin", () => {
 		expect(formatMessage("a".repeat(500), "root", 450)).toHaveLength(450);
 	});
 
+	test("Handles non-200 codes", async () => {
+		Nock("https://www.etymonline.com")
+			.get("/word/root")
+			.query(true)
+			.reply(404);
+
+		expect((await getDefinition("root", null))).toBe("Error connecting to etymonline site, status code: 404");
+	});
+
 	test("Gets correct definition", async () => {
 		Nock("https://www.etymonline.com")
 			.get("/word/root")
