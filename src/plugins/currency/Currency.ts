@@ -3,9 +3,10 @@ import Chalk from 'chalk';
 
 export async function getRates(from, to, amount) {
 	const url = `https://api.exchangeratesapi.io/latest?symbols=${to}&base=${from}`;
-	const resp = (await Needle('get', url)).body;
-	if (resp.error) return resp.error;
-	return amount * resp.rates[to];
+	const response = await Needle('get', url);
+	if (response.statusCode != 200) return `Error connecting to currency site, status code: ${response.statusCode}`;
+	if (response.body.error) return response.body.error;
+	return amount * response.body.rates[to];
 }
 
 export function processMessage(message) {

@@ -18,15 +18,17 @@ export function formatResponse(json, showLink?) {
 export async function getIMDb(tt) {
 	const url = `http://www.omdbapi.com/?i=tt${encodeURIComponent(tt)}&apikey=${process.env.OMDB_APIKEY}`;
 
-	const resp = await Needle('get', url);
-	return formatResponse(resp.body);
+	const response = await Needle('get', url);
+	if (response.statusCode != 200) return `Error connecting to OMDb site, status code: ${response.statusCode}`;
+	return formatResponse(response.body);
 }
 
 export async function searchIMDb(search) {
 	const url = `http://www.omdbapi.com/?t=${encodeURIComponent(search)}&apikey=${process.env.OMDB_APIKEY}`;
 
-	const resp = await Needle('get', url);
-	return formatResponse(resp.body, true);
+	const response = await Needle('get', url);
+	if (response.statusCode != 200) return `Error connecting to OMDb site, status code: ${response.statusCode}`;
+	return formatResponse(response.body, true);
 }
 
 function IMDbHandler(command, event, client, next) {

@@ -41,6 +41,14 @@ describe("LinkTitle plugin", () => {
 		expect(await getPage("https://hexjelly.com")).toBe(false);
 	});
 
+	test("Handles non-200 codes", async () => {
+		Nock("https://hexjelly.com")
+			.head("/")
+			.reply(404);
+
+		expect((await getPage("https://hexjelly.com"))).toBe(false);
+	});
+
 	test("fetches title correctly", () => {
 		const htmlWithRandomWhitespace = "<html><head><title> Some random \r\n\r \n \r title</title></head></html>";
 		expect(processPage(htmlWithRandomWhitespace)).toBe(" Some random title");

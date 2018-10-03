@@ -9,13 +9,17 @@ export async function getPage(url) {
 	on the stream after header event if they aren't what we want, but it's a bit complicated.
 	we'll just make two requests because lazy.
 	*/
-	const content_type = (await Needle('head', url, null, { follow_max: 2 })).headers["content-type"];
+	let response = await Needle('head', url, null, { follow_max: 2 });
+	if (response.statusCode != 200) return false;
+	const content_type = response.headers["content-type"];
 
 	if (!content_type || !content_type.toLowerCase().includes("text/html")) {
 		return false;
 	}
 
-	return (await Needle('get', url, null, { follow_max: 2 })).body;
+	response = await Needle('get', url, null, { follow_max: 2 });
+	if (response.statusCode != 200) return false;
+	return response.body;
 }
 
 export function processMessage(message) {

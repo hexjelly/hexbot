@@ -4,12 +4,14 @@ import Cheerio from 'cheerio';
 
 export async function getDefinition(word, modifier) {
 	const url = `https://www.etymonline.com/word/${encodeURIComponent(word)}`;
-	const body = (await Needle('get', url)).body;
+	const response = (await Needle('get', url));
+
+	if (response.statusCode != 200) return `Error connecting to etymonline site, status code: ${response.statusCode}`;
 
 	let term;
 	let definition;
 	let element;
-	const $ = Cheerio.load(body);
+	const $ = Cheerio.load(response.body);
 
 	if (modifier) {
 		const search = `${word.toLowerCase()} (${modifier.toLowerCase()})`;

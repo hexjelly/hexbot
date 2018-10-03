@@ -16,6 +16,15 @@ describe("Currency plugin", () => {
 		expect(processMessage("!currency some random other text")).toBe(false);
 	});
 
+	test("Handles non-200 codes", async () => {
+		Nock("https://api.exchangeratesapi.io")
+			.get("/latest")
+			.query(true)
+			.reply(404);
+
+		expect((await getRates("USD", "GBP", 1))).toBe("Error connecting to currency site, status code: 404");
+	});
+
 	test("Converts correctly", async () => {
 		const validResponse = {
 			"base": "USD",
