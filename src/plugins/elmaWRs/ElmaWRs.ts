@@ -37,12 +37,13 @@ export function formatMessage(internal, name, time, kuski) {
 }
 
 export function processMessage(message) {
-	const pattern = /^!wr\s*0*(\d*)$/i;
-	const result = pattern.exec(message);
+    const pattern = /^!wr\s*0*(\d*)$/i;
+    const result = pattern.exec(message);
 
-	if (!result) return false;
+    if (!result) return false;
 
-	const internal = parseInt(result[1].toString());
+    const internal = parseInt(result[1]);
+
     if (isNaN(internal) || internal < 1 || internal > 54) return false;
 
     return internal;
