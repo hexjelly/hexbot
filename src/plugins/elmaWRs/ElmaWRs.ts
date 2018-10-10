@@ -55,7 +55,7 @@ function ElmaWRsHandler(command, event, client, next) {
 		if (!internal) return next();
 
 		getWR(internal)
-			.then( wr => {
+			.then( (wr: any) => {
 				client.say(event.target, formatMessage(internal, wr.lev, wr.time, wr.kuski));
 			})
 			.catch(error => console.error(Chalk.red(error)));
