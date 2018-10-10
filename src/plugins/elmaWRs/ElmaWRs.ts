@@ -29,7 +29,7 @@ export async function formatResponse(body, nr) {
     const kuski = $('td', '.wrtable').eq(element_nr).text().trim();
     const lev = INTERNALS[nr-1];
 
-    return { time, kuski, lev };
+    return formatMessage(nr, lev, time, kuski);
 }
 
 export function formatMessage(internal, name, time, kuski) {
@@ -55,8 +55,8 @@ function ElmaWRsHandler(command, event, client, next) {
 		if (!internal) return next();
 
 		getWR(internal)
-			.then( (wr: any) => {
-				client.say(event.target, formatMessage(internal, wr.lev, wr.time, wr.kuski));
+			.then( wr => {
+				client.say(event.target, wr);
 			})
 			.catch(error => console.error(Chalk.red(error)));
 
