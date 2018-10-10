@@ -1,7 +1,7 @@
 import 'log-timestamp'; // adds datetimestamp to any console.* calls
 import Client from './client';
 
-import { IMDb, Logging, LinkTitle, Currency, Etymology } from './plugins';
+import { IMDb, Logging, LinkTitle, Currency, Etymology, ElmaWRs } from './plugins';
 
 const bot: any = new Client(); // no typings for irc-framework class :(
 
@@ -25,5 +25,6 @@ bot.use(IMDb());
 bot.use(Currency());
 bot.use(Etymology());
 bot.use(LinkTitle());
+bot.use(ElmaWRs());
 
 export default bot;
