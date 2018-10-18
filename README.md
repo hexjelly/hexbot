@@ -15,6 +15,7 @@ DB_FILE_PROD=bot.db
 DB_FILE_TEST=test.db
 OMDB_APIKEY=
 YOUTUBE_APIKEY=
+WORDNIK_APIKEY=
 ```
 
 2. `npm i`
