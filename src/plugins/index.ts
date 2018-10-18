@@ -5,3 +5,4 @@ export { Currency } from './currency/Currency';
 export { Etymology } from './etymology/Etymology';
 export { ElmaWRs } from './elmaWRs/ElmaWRs';
 export { YouTube } from './youtube/YouTube';
+export { Dictionary } from './dictionary/Dictionary';
