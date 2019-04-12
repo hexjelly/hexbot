@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/hexjelly/hexbot#readme",
   "dependencies": {
-    "@types/cheerio": "^0.22.9",
+    "@types/cheerio": "^0.22.11",
     "@types/dotenv": "^4.0.3",
     "@types/needle": "^2.0.2",
     "@types/sequelize": "^4.27.47",
