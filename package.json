@@ -38,7 +38,7 @@
     "@types/jest": "^24.0.12",
     "@types/nock": "^10.0.1",
     "coveralls": "^3.0.3",
-    "jest": "^24.7.1",
+    "jest": "^24.8.0",
     "nock": "^10.0.6",
     "ts-jest": "^24.0.2",
     "typescript": "^3.4.5"
