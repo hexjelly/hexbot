@@ -37,7 +37,7 @@
   "devDependencies": {
     "@types/jest": "^24.0.18",
     "@types/nock": "^11.1.0",
-    "coveralls": "^3.0.6",
+    "coveralls": "^3.0.7",
     "jest": "^24.9.0",
     "nock": "^11.4.0",
     "ts-jest": "^24.1.0",
