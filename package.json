@@ -35,7 +35,7 @@
     "sqlite3": "^4.1.0"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.20",
+    "@types/jest": "^24.0.22",
     "@types/nock": "^11.1.0",
     "coveralls": "^3.0.7",
     "jest": "^24.9.0",
