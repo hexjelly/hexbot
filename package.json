@@ -28,7 +28,7 @@
     "chalk": "^3.0.0",
     "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.2.0",
-    "irc-framework": "^4.4.0",
+    "irc-framework": "^4.5.2",
     "log-timestamp": "^0.3.0",
     "needle": "^2.4.0",
     "sequelize": "^5.21.2",
