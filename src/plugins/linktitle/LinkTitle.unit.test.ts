@@ -30,14 +30,14 @@ describe("LinkTitle plugin", () => {
 	test("only fetches pages that are text/html", async () => {
 		Nock('https://hexjelly.com')
 			.head('/')
-			.reply(200, null, { 'Content-Type': 'text/html' })
+			.reply(200, undefined, { 'Content-Type': 'text/html' })
 			.get('/')
 			.reply(200, '<html>Yay</html>', { 'Content-Type': 'text/html' });
 		expect(await getPage("https://hexjelly.com")).toBe('<html>Yay</html>');
 
 		Nock('https://hexjelly.com')
 			.head('/')
-			.reply(200, null, { 'Content-Type': 'application/json' })
+			.reply(200, undefined, { 'Content-Type': 'application/json' })
 		expect(await getPage("https://hexjelly.com")).toBe(false);
 	});
 
