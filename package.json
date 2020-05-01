@@ -7,7 +7,9 @@
     "start": "node -r dotenv/config dist/index.js",
     "test": "jest",
     "build": "tsc",
-    "coverage": "npm run test -- --coverage && cat ./coverage/lcov.info | coveralls"
+    "coverage": "npm run test -- --coverage && cat ./coverage/lcov.info | coveralls",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -20,7 +22,7 @@
   },
   "homepage": "https://github.com/hexjelly/hexbot#readme",
   "dependencies": {
-    "@types/cheerio": "^0.22.18",
+    "@types/cheerio": "^0.22.17",
     "@types/dotenv": "^8.2.0",
     "@types/needle": "^2.0.4",
     "@types/sequelize": "^4.28.8",
@@ -32,7 +34,8 @@
     "log-timestamp": "^0.3.0",
     "needle": "^2.4.0",
     "sequelize": "^5.21.5",
-    "sqlite3": "^4.2.0"
+    "sqlite3": "^4.1.1",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
@@ -42,5 +45,6 @@
     "nock": "^12.0.3",
     "ts-jest": "^25.3.0",
     "typescript": "^3.8.3"
-  }
+  },
+  "snyk": true
 }
