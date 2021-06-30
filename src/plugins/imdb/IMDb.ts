@@ -38,7 +38,7 @@ function IMDbHandler(command, event, client, next) {
 	}
 
 	if (command === "privmsg" && event.nick != client.user.nick) {
-		const pattern = /^!imdb\s(.+)|.*imdb\.com\/title\/tt(\d{7}).*/i;
+		const pattern = /^!imdb\s(.+)|.*imdb\.com\/title\/tt(\d{7,}).*/i;
 		const result = pattern.exec(event.message);
 
 		if (!result) return next();
