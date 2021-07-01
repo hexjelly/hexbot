@@ -31,7 +31,7 @@
     "irc-framework": "^4.10.0",
     "log-timestamp": "^0.3.0",
     "needle": "^2.6.0",
-    "sequelize": "^6.6.2",
+    "sequelize": "^6.6.4",
     "sqlite3": "^5.0.2"
   },
   "devDependencies": {
