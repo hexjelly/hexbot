@@ -23,7 +23,7 @@
     "@types/cheerio": "^0.22.30",
     "@types/dotenv": "^8.2.0",
     "@types/needle": "^2.5.2",
-    "@types/sequelize": "^4.28.9",
+    "@types/sequelize": "^4.28.10",
     "@types/sqlite3": "^3.1.7",
     "chalk": "^4.1.2",
     "cheerio": "^1.0.0-rc.10",
