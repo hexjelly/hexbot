@@ -30,7 +30,7 @@
     "dotenv": "^10.0.0",
     "irc-framework": "^4.11.0",
     "log-timestamp": "^0.3.0",
-    "needle": "^2.8.0",
+    "needle": "^3.0.0",
     "sequelize": "^6.8.0",
     "sqlite3": "^5.0.2"
   },
