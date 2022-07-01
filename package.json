@@ -32,7 +32,7 @@
     "log-timestamp": "^0.3.0",
     "needle": "^3.0.0",
     "sequelize": "^6.21.0",
-    "sqlite3": "^5.0.3"
+    "sqlite3": "^5.0.8"
   },
   "devDependencies": {
     "@types/jest": "^27.0.2",
