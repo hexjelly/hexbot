@@ -27,7 +27,7 @@
     "@types/sqlite3": "^3.1.7",
     "chalk": "^5.0.1",
     "cheerio": "^1.0.0-rc.10",
-    "dotenv": "^10.0.0",
+    "dotenv": "^16.0.1",
     "irc-framework": "^4.12.1",
     "log-timestamp": "^0.3.0",
     "needle": "^3.0.0",
