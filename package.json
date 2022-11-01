@@ -25,7 +25,7 @@
     "@types/needle": "^2.5.2",
     "@types/sequelize": "^4.28.10",
     "@types/sqlite3": "^3.1.7",
-    "chalk": "^5.0.1",
+    "chalk": "^5.1.2",
     "cheerio": "^1.0.0-rc.10",
     "dotenv": "^10.0.0",
     "irc-framework": "^4.12.1",
